@@ -15,12 +15,12 @@ interface CompanyCardProps {
 const CompanyCard = ({ logo, name, description, valuation, totalBlockSize, investors, onClick }: CompanyCardProps) => {
   return (
     <Card 
-      className="h-full hover:shadow-md transition-shadow cursor-pointer"
+      className="h-full hover:shadow-md transition-shadow cursor-pointer border-t-4 border-t-stargaze-purple"
       onClick={onClick}
     >
       <CardHeader className="flex justify-center items-center pb-2">
         <div className="w-16 h-16 flex items-center justify-center">
-          <img src={logo} alt={`${name} logo`} className="max-w-full max-h-full" />
+          <img src={logo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
         </div>
         <h3 className="text-lg font-semibold mt-2">{name}</h3>
       </CardHeader>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import CompanyCard from './CompanyCard';
 import CompanyDetail from './CompanyDetail';
@@ -7,7 +6,7 @@ import CompanyDetail from './CompanyDetail';
 const companies = [
   {
     id: 1,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png",
     name: "NSE India Limited",
     description: "The National Stock Exchange of India Limited is the leading stock exchange of India, located in Mumbai.",
     valuation: 13.5,
@@ -16,7 +15,7 @@ const companies = [
   },
   {
     id: 2,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png",
     name: "Tata Capital",
     description: "A financial services company offering a diverse range of financial products including commercial finance, infrastructure finance, and more.",
     valuation: 8.7,
@@ -358,7 +357,7 @@ const companies = [
   },
   {
     id: 40,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png",
     name: "Indian Potash Limited",
     description: "One of the largest importers of potash in India, dealing with fertilizers and agricultural inputs.",
     valuation: 2.6,

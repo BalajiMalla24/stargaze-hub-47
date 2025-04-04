@@ -25,17 +25,17 @@ const Index = () => {
         
         <div className="container mx-auto mt-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
               <h2 className="text-2xl font-bold mb-6">Index Performance</h2>
               <ValuationChart />
               <div className="flex justify-between mt-4">
-                <button className="px-4 py-2 text-sm font-medium">3M</button>
-                <button className="px-4 py-2 text-sm font-medium">6M</button>
+                <button className="px-4 py-2 text-sm font-medium rounded hover:bg-gray-100 transition-colors">3M</button>
+                <button className="px-4 py-2 text-sm font-medium rounded hover:bg-gray-100 transition-colors">6M</button>
                 <button className="px-4 py-2 text-sm font-medium bg-stargaze-purple text-white rounded">1Y</button>
-                <button className="px-4 py-2 text-sm font-medium">4Y</button>
+                <button className="px-4 py-2 text-sm font-medium rounded hover:bg-gray-100 transition-colors">4Y</button>
               </div>
             </div>
-            <div>
+            <div className="bg-white p-6 rounded-lg shadow-sm">
               <h2 className="text-2xl font-bold mb-6">Investment Calculator</h2>
               <ReturnCalculator />
             </div>
