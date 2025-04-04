@@ -1,6 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import CompanyCard from './CompanyCard';
+import CompanyDetail from './CompanyDetail';
 
 // This is dummy data to simulate company information
 const companies = [
@@ -151,9 +152,21 @@ const generateMoreCompanies = () => {
 const allCompanies = generateMoreCompanies();
 
 const CompanyList = () => {
+  const [selectedCompany, setSelectedCompany] = useState<typeof companies[0] | null>(null);
+
+  const handleCompanyClick = (company: typeof companies[0]) => {
+    setSelectedCompany(company);
+  };
+
+  const handleCloseDetail = () => {
+    setSelectedCompany(null);
+  };
+
   return (
     <div className="container mx-auto mt-12">
-      <h2 className="text-2xl font-bold mb-6">Featured Companies</h2>
+      <h2 className="text-2xl font-bold mb-2">Companies in the Index</h2>
+      <p className="text-gray-600 mb-6">Click on a company to view detailed valuation history</p>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {allCompanies.map((company) => (
           <CompanyCard
@@ -164,12 +177,18 @@ const CompanyList = () => {
             valuation={company.valuation}
             totalBlockSize={company.totalBlockSize}
             investors={company.investors}
+            onClick={() => handleCompanyClick(company)}
           />
         ))}
       </div>
+      
       <div className="text-center mt-8 text-gray-500 italic">
         Note: Illustrative purposes only.
       </div>
+      
+      {selectedCompany && (
+        <CompanyDetail company={selectedCompany} onClose={handleCloseDetail} />
+      )}
     </div>
   );
 };

@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import ValuationChart from '@/components/ValuationChart';
+import ReturnCalculator from '@/components/ReturnCalculator';
 import CompanyList from '@/components/CompanyList';
 import Footer from '@/components/Footer';
 
@@ -23,8 +24,16 @@ const Index = () => {
         </div>
         
         <div className="container mx-auto mt-12">
-          <h2 className="text-2xl font-bold mb-6">Company Valuations</h2>
-          <ValuationChart />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <h2 className="text-2xl font-bold mb-6">Index Performance</h2>
+              <ValuationChart />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Investment Calculator</h2>
+              <ReturnCalculator />
+            </div>
+          </div>
         </div>
         
         <CompanyList />
