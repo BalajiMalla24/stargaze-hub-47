@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import CompanyCard from './CompanyCard';
 import CompanyDetail from './CompanyDetail';
@@ -6,9 +7,9 @@ import CompanyDetail from './CompanyDetail';
 const companies = [
   {
     id: 1,
-    logo: "/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png",
+    logo: "/lovable-uploads/da2bd597-0977-42a7-aefb-d0dcccadc324.png",
     name: "NSE India Limited",
-    description: "The National Stock Exchange of India Limited is the leading stock exchange of India, located in Mumbai.",
+    description: "The National Stock Exchange of India Limited is the leading stock exchange of India, located in Mumbai. It is the world's largest derivatives exchange by number of contracts traded.",
     valuation: 13.5,
     totalBlockSize: 6.8,
     investors: ["Strategic Investors"]

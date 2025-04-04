@@ -1,7 +1,12 @@
 
-import React from 'react';
-import { ArrowUp, ArrowDown } from "lucide-react";
+import React, { useState } from 'react';
+import { ArrowUp, ArrowDown, Info, BarChart, LineChart as LineChartIcon } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart as RechartsBarChart, Bar, Legend } from 'recharts';
+import { Toggle, toggleVariants } from "@/components/ui/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 interface ValuationRecord {
   date: string;
@@ -9,6 +14,29 @@ interface ValuationRecord {
   sharePrice: string;
   change: number;
   source: string;
+}
+
+interface DealRecord {
+  round: string;
+  amount: number;
+  investors: string;
+  postValuation: string;
+  date: string;
+}
+
+interface CompanyInfoType {
+  name: string;
+  brandName?: string;
+  founded: string;
+  headquarters: string;
+  domain: string;
+  industry: string;
+  lastValuation: string;
+  pricePerShare: string;
+  status: string;
+  description: string;
+  sector?: string;
+  stage?: string;
 }
 
 interface CompanyDetailProps {
@@ -22,7 +50,9 @@ interface CompanyDetailProps {
 }
 
 const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
-  // Sample valuation data - in a real app, this would be fetched based on the company ID
+  const [chartType, setChartType] = useState<'valuation' | 'price'>('valuation');
+  
+  // Sample data - in a real app, these would be fetched based on the company ID
   const valuationData: ValuationRecord[] = [
     { date: '17/03/2025', valuation: '$ 6,394,407,329.21', sharePrice: '₹ 600.00', change: 0.02, source: 'Source 4' },
     { date: '16/03/2025', valuation: '$ 6,392,898,579.25', sharePrice: '₹ 600.00', change: 0.02, source: 'Source 4' },
@@ -35,12 +65,73 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
     { date: '09/03/2025', valuation: '$ 6,397,081,132.86', sharePrice: '₹ 600.00', change: -0.02, source: 'Source 4' },
   ];
 
+  // Chart data for valuation/price trends
+  const chartData = [
+    { name: 'Jan', valuation: 100, price: 100 },
+    { name: 'Feb', valuation: 105, price: 103 },
+    { name: 'Mar', valuation: 110, price: 107 },
+    { name: 'Apr', valuation: 115, price: 112 },
+    { name: 'May', valuation: 120, price: 115 },
+    { name: 'Jun', valuation: 130, price: 122 },
+    { name: 'Jul', valuation: 140, price: 126 },
+    { name: 'Aug', valuation: 150, price: 135 },
+    { name: 'Sep', valuation: 155, price: 140 },
+    { name: 'Oct', valuation: 160, price: 148 },
+    { name: 'Nov', valuation: 165, price: 152 },
+    { name: 'Dec', valuation: 170, price: 160 },
+  ];
+
+  // Sample deal history data
+  const dealHistory: DealRecord[] = [
+    { round: 'Series A', amount: 1.28, investors: 'Kae Capital, Peak XV Partners, Others', postValuation: '₹ 30.3 Cr ($ 4.33 M)', date: 'Aug 2018' },
+    { round: 'Series A', amount: 9.19, investors: 'Accel India, Kae Capital, Peak XV Partners', postValuation: '₹ 228 Cr ($ 32.8 M)', date: 'Mar 2019' },
+    { round: 'Series B', amount: 31.62, investors: 'Accel India, Greenoaks Capital, Kae Capital, Lightspeed Ventures', postValuation: '₹ 980 Cr ($ 138.09 M)', date: 'Nov 2019' },
+    { round: 'Series C', amount: 30.83, investors: 'Accel India, Greenoaks Capital, Kae Capital, Lightspeed Ventures', postValuation: '₹ 1,894 Cr ($ 251.76 M)', date: 'Jun 2020' },
+    { round: 'Series D', amount: 116.55, investors: 'Greenoaks Capital, Kae Capital, Lightspeed Ventures, Peak XV Partners', postValuation: '₹ 4,231 Cr ($ 580.47 M)', date: 'Jan 2021' },
+    { round: 'Series E', amount: 120, investors: '360 ONE, D1 Capital Partners, Greenoaks Capital, Lightspeed Ventures', postValuation: '₹ 9,830 Cr ($ 1313.3 M)', date: 'Aug 2021' },
+    { round: 'Series F', amount: 210, investors: '360 ONE, D1 Capital Partners, Greenoaks Capital, Lightspeed Ventures', postValuation: '₹ 20,146 Cr ($ 2697.04 M)', date: 'Dec 2021' },
+    { round: 'Series F', amount: 150, investors: 'Avenir Growth', postValuation: '₹ 22,318 Cr ($ 2695.11 M)', date: 'May 2023' },
+    { round: 'Series F', amount: 20.04, investors: 'Wheelhouse Ventures', postValuation: '₹ 23,187 Cr ($ 2799.18 M)', date: 'Mar 2024' },
+    { round: 'Series F', amount: 67, investors: 'Avenir Growth, Baillie Gifford, Greenoaks Capital, Khosla Ventures', postValuation: '₹ 25,885 Cr ($ 3069.55 M)', date: 'Dec 2024' },
+  ];
+
+  // Deal data for the bar chart
+  const dealBarData = dealHistory.map(deal => ({
+    name: deal.date,
+    amount: deal.amount,
+    round: deal.round,
+  }));
+
+  // Sample company info data
+  const companyInfo: CompanyInfoType = {
+    name: company.name,
+    brandName: company.name,
+    founded: "2011",
+    headquarters: "Mumbai, India",
+    domain: "Financial Services",
+    industry: "Financial Services",
+    lastValuation: "USD 13.5 Bn",
+    pricePerShare: "₹ 1,050.00",
+    status: "Operational",
+    description: company.description,
+    sector: "Finance",
+    stage: "Late Stage",
+  };
+
+  // Key investors
+  const keyInvestors = [
+    "Strategic Investors",
+    "Government of India",
+    "Foreign Institutional Investors",
+    "Domestic Institutional Investors"
+  ];
+
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
-        <div className="sticky top-0 bg-white p-4 border-b flex items-center justify-between">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-6xl max-h-[90vh] overflow-auto">
+        <div className="sticky top-0 bg-white p-4 border-b flex items-center justify-between z-10">
           <div className="flex items-center gap-3">
-            <img src={company.logo} alt={`${company.name} logo`} className="w-10 h-10" />
+            <img src={company.logo} alt={`${company.name} logo`} className="w-10 h-10 object-contain" />
             <h2 className="text-xl font-bold">{company.name}</h2>
           </div>
           <button 
@@ -51,51 +142,261 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
           </button>
         </div>
         
-        <div className="p-4">
-          <p className="text-gray-600 mb-6">{company.description}</p>
-          
-          <h3 className="text-lg font-semibold mb-3">Valuation History</h3>
-          
-          <div className="border rounded-lg overflow-auto">
-            <Table>
-              <TableHeader className="bg-gray-100">
-                <TableRow>
-                  <TableHead className="text-center">Date of Valuation</TableHead>
-                  <TableHead className="text-center">Valuation (USD)</TableHead>
-                  <TableHead className="text-center">Share Price</TableHead>
-                  <TableHead className="text-center">% Change (Valuation)</TableHead>
-                  <TableHead className="text-center">Source</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {valuationData.map((record, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="text-center">{record.date}</TableCell>
-                    <TableCell className="text-center">{record.valuation}</TableCell>
-                    <TableCell className="text-center">{record.sharePrice}</TableCell>
-                    <TableCell className="text-center">
-                      <span className="flex items-center justify-center">
-                        {record.change > 0 ? (
-                          <>
-                            <ArrowUp className="h-4 w-4 text-green-500 mr-1" />
-                            <span className="text-green-500">{record.change.toFixed(2)} %</span>
-                          </>
-                        ) : record.change < 0 ? (
-                          <>
-                            <ArrowDown className="h-4 w-4 text-red-500 mr-1" />
-                            <span className="text-red-500">{Math.abs(record.change).toFixed(2)} %</span>
-                          </>
-                        ) : (
-                          <span className="text-red-500">0.00 %</span>
-                        )}
-                      </span>
-                    </TableCell>
-                    <TableCell className="text-center">{record.source}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+        <div className="p-6">
+          <Tabs defaultValue="valuation">
+            <TabsList className="mb-6 w-full">
+              <TabsTrigger value="valuation" className="flex-1">Valuation History</TabsTrigger>
+              <TabsTrigger value="company-details" className="flex-1">Company Details</TabsTrigger>
+              <TabsTrigger value="deal-history" className="flex-1">Deal History</TabsTrigger>
+              <TabsTrigger value="key-investors" className="flex-1">Key Investors</TabsTrigger>
+            </TabsList>
+
+            {/* Valuation History Tab */}
+            <TabsContent value="valuation" className="space-y-6">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-lg font-semibold">Performance Chart</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-600">Chart Type:</span>
+                      <ToggleGroup type="single" value={chartType} onValueChange={(value) => value && setChartType(value as 'valuation' | 'price')}>
+                        <ToggleGroupItem value="valuation" aria-label="Valuation Chart">
+                          <LineChartIcon className="mr-1 h-4 w-4" />
+                          Valuation
+                        </ToggleGroupItem>
+                        <ToggleGroupItem value="price" aria-label="Price Chart">
+                          <BarChart className="mr-1 h-4 w-4" />
+                          Price
+                        </ToggleGroupItem>
+                      </ToggleGroup>
+                    </div>
+                  </div>
+                  
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={chartData}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis 
+                          label={{ 
+                            value: chartType === 'valuation' ? 'Valuation (Starting at 100)' : 'Share Price (Starting at 100)', 
+                            angle: -90, 
+                            position: 'insideLeft', 
+                            style: { textAnchor: 'middle' } 
+                          }}
+                        />
+                        <Tooltip 
+                          formatter={(value) => [
+                            `${value}`, 
+                            chartType === 'valuation' ? 'Valuation Index' : 'Price Index'
+                          ]} 
+                        />
+                        <Legend />
+                        <Line 
+                          type="monotone"
+                          dataKey={chartType}
+                          stroke="#6949A7"
+                          strokeWidth={2}
+                          dot={{ r: 4 }}
+                          activeDot={{ r: 6 }}
+                          name={chartType === 'valuation' ? 'Valuation Index' : 'Price Index'}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="border rounded-lg overflow-auto">
+                <Table>
+                  <TableHeader className="bg-gray-100">
+                    <TableRow>
+                      <TableHead className="text-center">Date of Valuation</TableHead>
+                      <TableHead className="text-center">Valuation (USD)</TableHead>
+                      <TableHead className="text-center">Share Price</TableHead>
+                      <TableHead className="text-center">% Change (Valuation)</TableHead>
+                      <TableHead className="text-center">Source</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {valuationData.map((record, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="text-center">{record.date}</TableCell>
+                        <TableCell className="text-center">{record.valuation}</TableCell>
+                        <TableCell className="text-center">{record.sharePrice}</TableCell>
+                        <TableCell className="text-center">
+                          <span className="flex items-center justify-center">
+                            {record.change > 0 ? (
+                              <>
+                                <ArrowUp className="h-4 w-4 text-green-500 mr-1" />
+                                <span className="text-green-500">{record.change.toFixed(2)} %</span>
+                              </>
+                            ) : record.change < 0 ? (
+                              <>
+                                <ArrowDown className="h-4 w-4 text-red-500 mr-1" />
+                                <span className="text-red-500">{Math.abs(record.change).toFixed(2)} %</span>
+                              </>
+                            ) : (
+                              <span className="text-gray-500">0.00 %</span>
+                            )}
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-center">{record.source}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </TabsContent>
+
+            {/* Company Details Tab */}
+            <TabsContent value="company-details">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex flex-col md:flex-row gap-6 mb-6">
+                    <div className="flex-shrink-0 flex items-center justify-center">
+                      <img src={company.logo} alt={`${company.name} logo`} className="w-36 h-36 object-contain" />
+                    </div>
+                    <div className="space-y-2 flex-grow">
+                      <h3 className="text-2xl font-bold">{companyInfo.name}</h3>
+                      <p className="text-gray-700">{companyInfo.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4">
+                    <div>
+                      <h4 className="text-sm text-gray-500">Name</h4>
+                      <p className="font-medium">{companyInfo.name}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Brand Name</h4>
+                      <p className="font-medium">{companyInfo.brandName || '-'}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Founded On</h4>
+                      <p className="font-medium">{companyInfo.founded}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Headquarters</h4>
+                      <p className="font-medium">{companyInfo.headquarters}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Domain</h4>
+                      <p className="font-medium">{companyInfo.domain}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Industry</h4>
+                      <p className="font-medium">{companyInfo.industry}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Last Round Valuation</h4>
+                      <p className="font-medium">{companyInfo.lastValuation}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Price Per Share (Fully Diluted)</h4>
+                      <p className="font-medium">{companyInfo.pricePerShare}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Company Status</h4>
+                      <p className="font-medium">{companyInfo.status}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Sector</h4>
+                      <p className="font-medium">{companyInfo.sector || '-'}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-gray-500">Stage</h4>
+                      <p className="font-medium">{companyInfo.stage || '-'}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Deal History Tab */}
+            <TabsContent value="deal-history" className="space-y-6">
+              <Card>
+                <CardContent className="pt-6">
+                  <h3 className="text-lg font-semibold mb-4">Funding Rounds</h3>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <RechartsBarChart
+                        data={dealBarData}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis 
+                          dataKey="name" 
+                          angle={-45} 
+                          textAnchor="end" 
+                          height={60}
+                        />
+                        <YAxis 
+                          label={{ 
+                            value: 'Deal Amount ($M)', 
+                            angle: -90, 
+                            position: 'insideLeft', 
+                            style: { textAnchor: 'middle' } 
+                          }}
+                        />
+                        <Tooltip />
+                        <Legend />
+                        <Bar 
+                          dataKey="amount" 
+                          fill="#6949A7" 
+                          name="Deal Amount ($M)"
+                        />
+                      </RechartsBarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="border rounded-lg overflow-auto">
+                <Table>
+                  <TableHeader className="bg-gray-100">
+                    <TableRow>
+                      <TableHead>Round</TableHead>
+                      <TableHead>Deal Amount ($M)</TableHead>
+                      <TableHead>Investors</TableHead>
+                      <TableHead>Post Money Valuation</TableHead>
+                      <TableHead>Deal Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {dealHistory.map((deal, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{deal.round}</TableCell>
+                        <TableCell>{deal.amount}</TableCell>
+                        <TableCell className="max-w-xs">{deal.investors}</TableCell>
+                        <TableCell>{deal.postValuation}</TableCell>
+                        <TableCell>{deal.date}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </TabsContent>
+
+            {/* Key Investors Tab */}
+            <TabsContent value="key-investors">
+              <Card>
+                <CardContent className="pt-6">
+                  <h3 className="text-lg font-semibold mb-4">Key Investors</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {keyInvestors.map((investor, index) => (
+                      <div key={index} className="p-4 border rounded-lg bg-gray-50">
+                        <p className="font-medium text-center">{investor}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>

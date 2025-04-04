@@ -13,6 +13,11 @@ interface CompanyCardProps {
 }
 
 const CompanyCard = ({ logo, name, description, valuation, totalBlockSize, investors, onClick }: CompanyCardProps) => {
+  // Use NSE logo for NSE India Limited
+  const displayLogo = name === "NSE India Limited" 
+    ? "/lovable-uploads/da2bd597-0977-42a7-aefb-d0dcccadc324.png" 
+    : logo;
+    
   return (
     <Card 
       className="h-full hover:shadow-md transition-shadow cursor-pointer border-t-4 border-t-stargaze-purple"
@@ -20,7 +25,7 @@ const CompanyCard = ({ logo, name, description, valuation, totalBlockSize, inves
     >
       <CardHeader className="flex justify-center items-center pb-2">
         <div className="w-16 h-16 flex items-center justify-center">
-          <img src={logo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
+          <img src={displayLogo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
         </div>
         <h3 className="text-lg font-semibold mt-2">{name}</h3>
       </CardHeader>
