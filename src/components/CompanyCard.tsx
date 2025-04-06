@@ -13,8 +13,10 @@ interface CompanyCardProps {
 }
 
 const CompanyCard = ({ logo, name, description, valuation, totalBlockSize, investors, onClick }: CompanyCardProps) => {
-  // Use NSE logo for all companies
-  const nseLogoPath = "/lovable-uploads/da2bd597-0977-42a7-aefb-d0dcccadc324.png";
+  // Use company-specific logo or fallback to a placeholder
+  const logoPath = logo && logo !== "/placeholder.svg" 
+    ? logo 
+    : `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random&color=fff&size=128`;
     
   return (
     <Card 
@@ -22,8 +24,8 @@ const CompanyCard = ({ logo, name, description, valuation, totalBlockSize, inves
       onClick={onClick}
     >
       <CardHeader className="flex justify-center items-center pb-2">
-        <div className="w-16 h-16 flex items-center justify-center">
-          <img src={nseLogoPath} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
+        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 overflow-hidden">
+          <img src={logoPath} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
         </div>
         <h3 className="text-lg font-semibold mt-2">{name}</h3>
       </CardHeader>
