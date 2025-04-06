@@ -1,12 +1,11 @@
-
 import React, { useState } from 'react';
-import { ArrowUp, ArrowDown, Info, BarChart, LineChart as LineChartIcon } from "lucide-react";
+import { ArrowUp, ArrowDown, Info, BarChart, LineChart as LineChartIcon, FileText, Calculator, Landmark, Users, Building } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart as RechartsBarChart, Bar, Legend } from 'recharts';
-import { Toggle, toggleVariants } from "@/components/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface ValuationRecord {
   date: string;
@@ -52,7 +51,6 @@ interface CompanyDetailProps {
 const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
   const [chartType, setChartType] = useState<'valuation' | 'price'>('valuation');
   
-  // Sample data - in a real app, these would be fetched based on the company ID
   const valuationData: ValuationRecord[] = [
     { date: '17/03/2025', valuation: '$ 6,394,407,329.21', sharePrice: '₹ 600.00', change: 0.02, source: 'Source 4' },
     { date: '16/03/2025', valuation: '$ 6,392,898,579.25', sharePrice: '₹ 600.00', change: 0.02, source: 'Source 4' },
@@ -65,7 +63,6 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
     { date: '09/03/2025', valuation: '$ 6,397,081,132.86', sharePrice: '₹ 600.00', change: -0.02, source: 'Source 4' },
   ];
 
-  // Chart data for valuation/price trends
   const chartData = [
     { name: 'Jan', valuation: 100, price: 100 },
     { name: 'Feb', valuation: 105, price: 103 },
@@ -81,7 +78,6 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
     { name: 'Dec', valuation: 170, price: 160 },
   ];
 
-  // Sample deal history data
   const dealHistory: DealRecord[] = [
     { round: 'Series A', amount: 1.28, investors: 'Kae Capital, Peak XV Partners, Others', postValuation: '₹ 30.3 Cr ($ 4.33 M)', date: 'Aug 2018' },
     { round: 'Series A', amount: 9.19, investors: 'Accel India, Kae Capital, Peak XV Partners', postValuation: '₹ 228 Cr ($ 32.8 M)', date: 'Mar 2019' },
@@ -95,14 +91,12 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
     { round: 'Series F', amount: 67, investors: 'Avenir Growth, Baillie Gifford, Greenoaks Capital, Khosla Ventures', postValuation: '₹ 25,885 Cr ($ 3069.55 M)', date: 'Dec 2024' },
   ];
 
-  // Deal data for the bar chart
   const dealBarData = dealHistory.map(deal => ({
     name: deal.date,
     amount: deal.amount,
     round: deal.round,
   }));
 
-  // Sample company info data
   const companyInfo: CompanyInfoType = {
     name: company.name,
     brandName: company.name,
@@ -118,13 +112,43 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
     stage: "Late Stage",
   };
 
-  // Key investors
   const keyInvestors = [
     "Strategic Investors",
     "Government of India",
     "Foreign Institutional Investors",
     "Domestic Institutional Investors"
   ];
+
+  const dataRoomDocuments = {
+    financials: [
+      { name: "Annual Report 2023-24", type: "PDF", size: "12.5 MB", date: "15/03/2024" },
+      { name: "Quarterly Results Q3 2024", type: "PDF", size: "5.8 MB", date: "10/02/2024" },
+      { name: "Financial Projections 2025", type: "XLSX", size: "3.2 MB", date: "20/01/2024" },
+      { name: "Cash Flow Statement", type: "PDF", size: "4.1 MB", date: "05/03/2024" },
+      { name: "Balance Sheet Summary", type: "PDF", size: "2.7 MB", date: "05/03/2024" },
+    ],
+    legal: [
+      { name: "Certificate of Incorporation", type: "PDF", size: "1.5 MB", date: "12/06/2011" },
+      { name: "Shareholders Agreement", type: "PDF", size: "8.2 MB", date: "03/12/2023" },
+      { name: "Board Resolutions 2023", type: "PDF", size: "4.6 MB", date: "15/01/2024" },
+      { name: "Regulatory Compliance Report", type: "PDF", size: "7.3 MB", date: "28/02/2024" },
+      { name: "Intellectual Property Rights", type: "PDF", size: "3.9 MB", date: "10/11/2023" },
+    ],
+    shareholding: [
+      { name: "Shareholding Pattern Q4 2023", type: "PDF", size: "2.3 MB", date: "05/01/2024" },
+      { name: "ESOP Structure", type: "PDF", size: "1.8 MB", date: "12/12/2023" },
+      { name: "Major Shareholders List", type: "XLSX", size: "1.2 MB", date: "17/02/2024" },
+      { name: "Cap Table", type: "XLSX", size: "2.5 MB", date: "15/03/2024" },
+      { name: "Voting Rights Document", type: "PDF", size: "3.7 MB", date: "20/12/2023" },
+    ],
+    official: [
+      { name: "Company Brochure", type: "PDF", size: "5.6 MB", date: "01/03/2024" },
+      { name: "Corporate Presentation", type: "PPTX", size: "15.3 MB", date: "22/02/2024" },
+      { name: "Pitch Deck", type: "PDF", size: "8.7 MB", date: "10/01/2024" },
+      { name: "Executive Team Profiles", type: "PDF", size: "4.2 MB", date: "18/12/2023" },
+      { name: "Company Policies Handbook", type: "PDF", size: "6.8 MB", date: "05/02/2024" },
+    ]
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
@@ -149,9 +173,9 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
               <TabsTrigger value="company-details" className="flex-1">Company Details</TabsTrigger>
               <TabsTrigger value="deal-history" className="flex-1">Deal History</TabsTrigger>
               <TabsTrigger value="key-investors" className="flex-1">Key Investors</TabsTrigger>
+              <TabsTrigger value="data-room" className="flex-1">Data Room</TabsTrigger>
             </TabsList>
 
-            {/* Valuation History Tab */}
             <TabsContent value="valuation" className="space-y-6">
               <Card>
                 <CardContent className="pt-6">
@@ -252,7 +276,6 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
               </div>
             </TabsContent>
 
-            {/* Company Details Tab */}
             <TabsContent value="company-details">
               <Card>
                 <CardContent className="pt-6">
@@ -316,7 +339,6 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
               </Card>
             </TabsContent>
 
-            {/* Deal History Tab */}
             <TabsContent value="deal-history" className="space-y-6">
               <Card>
                 <CardContent className="pt-6">
@@ -381,7 +403,6 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
               </div>
             </TabsContent>
 
-            {/* Key Investors Tab */}
             <TabsContent value="key-investors">
               <Card>
                 <CardContent className="pt-6">
@@ -392,6 +413,187 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
                         <p className="font-medium text-center">{investor}</p>
                       </div>
                     ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="data-room">
+              <Card>
+                <CardContent className="pt-6">
+                  <h3 className="text-xl font-semibold mb-6">Company Data Room</h3>
+                  <p className="text-gray-600 mb-6">
+                    Access important documents related to {company.name}. All documents are for authorized personnel only.
+                  </p>
+
+                  <div className="space-y-6">
+                    <Collapsible className="border rounded-md">
+                      <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-gray-50">
+                        <div className="flex items-center gap-2">
+                          <Calculator className="h-5 w-5 text-amber-500" />
+                          <h4 className="text-lg font-medium">Financial Documents</h4>
+                        </div>
+                        <div className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">
+                          {dataRoomDocuments.financials.length} items
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-4 border-t">
+                          <Table>
+                            <TableHeader className="bg-gray-50">
+                              <TableRow>
+                                <TableHead>Document Name</TableHead>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Size</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead className="text-right">Action</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {dataRoomDocuments.financials.map((doc, index) => (
+                                <TableRow key={index}>
+                                  <TableCell className="font-medium">{doc.name}</TableCell>
+                                  <TableCell>{doc.type}</TableCell>
+                                  <TableCell>{doc.size}</TableCell>
+                                  <TableCell>{doc.date}</TableCell>
+                                  <TableCell className="text-right">
+                                    <button className="text-amber-600 hover:text-amber-700 text-sm font-medium">
+                                      Download
+                                    </button>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    <Collapsible className="border rounded-md">
+                      <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-gray-50">
+                        <div className="flex items-center gap-2">
+                          <Landmark className="h-5 w-5 text-amber-500" />
+                          <h4 className="text-lg font-medium">Legal Documents</h4>
+                        </div>
+                        <div className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">
+                          {dataRoomDocuments.legal.length} items
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-4 border-t">
+                          <Table>
+                            <TableHeader className="bg-gray-50">
+                              <TableRow>
+                                <TableHead>Document Name</TableHead>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Size</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead className="text-right">Action</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {dataRoomDocuments.legal.map((doc, index) => (
+                                <TableRow key={index}>
+                                  <TableCell className="font-medium">{doc.name}</TableCell>
+                                  <TableCell>{doc.type}</TableCell>
+                                  <TableCell>{doc.size}</TableCell>
+                                  <TableCell>{doc.date}</TableCell>
+                                  <TableCell className="text-right">
+                                    <button className="text-amber-600 hover:text-amber-700 text-sm font-medium">
+                                      Download
+                                    </button>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    <Collapsible className="border rounded-md">
+                      <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-gray-50">
+                        <div className="flex items-center gap-2">
+                          <Users className="h-5 w-5 text-amber-500" />
+                          <h4 className="text-lg font-medium">Shareholding Documents</h4>
+                        </div>
+                        <div className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">
+                          {dataRoomDocuments.shareholding.length} items
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-4 border-t">
+                          <Table>
+                            <TableHeader className="bg-gray-50">
+                              <TableRow>
+                                <TableHead>Document Name</TableHead>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Size</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead className="text-right">Action</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {dataRoomDocuments.shareholding.map((doc, index) => (
+                                <TableRow key={index}>
+                                  <TableCell className="font-medium">{doc.name}</TableCell>
+                                  <TableCell>{doc.type}</TableCell>
+                                  <TableCell>{doc.size}</TableCell>
+                                  <TableCell>{doc.date}</TableCell>
+                                  <TableCell className="text-right">
+                                    <button className="text-amber-600 hover:text-amber-700 text-sm font-medium">
+                                      Download
+                                    </button>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    <Collapsible className="border rounded-md">
+                      <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-gray-50">
+                        <div className="flex items-center gap-2">
+                          <Building className="h-5 w-5 text-amber-500" />
+                          <h4 className="text-lg font-medium">Official Documents</h4>
+                        </div>
+                        <div className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">
+                          {dataRoomDocuments.official.length} items
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-4 border-t">
+                          <Table>
+                            <TableHeader className="bg-gray-50">
+                              <TableRow>
+                                <TableHead>Document Name</TableHead>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Size</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead className="text-right">Action</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {dataRoomDocuments.official.map((doc, index) => (
+                                <TableRow key={index}>
+                                  <TableCell className="font-medium">{doc.name}</TableCell>
+                                  <TableCell>{doc.type}</TableCell>
+                                  <TableCell>{doc.size}</TableCell>
+                                  <TableCell>{doc.date}</TableCell>
+                                  <TableCell className="text-right">
+                                    <button className="text-amber-600 hover:text-amber-700 text-sm font-medium">
+                                      Download
+                                    </button>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
                   </div>
                 </CardContent>
               </Card>
