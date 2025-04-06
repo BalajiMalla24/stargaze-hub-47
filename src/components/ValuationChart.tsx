@@ -2,23 +2,41 @@
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-// Sample data for the index performance
+// Extended sample data for the index performance to match reference image
 const performanceData = [
-  { name: '0', timeframe: 'Start', value: 100 },
-  { name: '1M', timeframe: '1 Month', value: 108 },
-  { name: '3M', timeframe: '3 Months', value: 115 },
-  { name: '6M', timeframe: '6 Months', value: 125 },
-  { name: '1Y', timeframe: '1 Year', value: 142 },
-  { name: '2Y', timeframe: '2 Years', value: 165 },
-  { name: '3Y', timeframe: '3 Years', value: 184 },
-  { name: '4Y', timeframe: '4 Years', value: 212 },
+  { name: 'Jan 23', timeframe: 'Jan 2023', value: 100 },
+  { name: 'Feb 23', timeframe: 'Feb 2023', value: 105 },
+  { name: 'Mar 23', timeframe: 'Mar 2023', value: 103 },
+  { name: 'Apr 23', timeframe: 'Apr 2023', value: 98 },
+  { name: 'May 23', timeframe: 'May 2023', value: 96 },
+  { name: 'Jun 23', timeframe: 'Jun 2023', value: 94 },
+  { name: 'Jul 23', timeframe: 'Jul 2023', value: 92 },
+  { name: 'Aug 23', timeframe: 'Aug 2023', value: 90 },
+  { name: 'Sep 23', timeframe: 'Sep 2023', value: 88 },
+  { name: 'Oct 23', timeframe: 'Oct 2023', value: 85 },
+  { name: 'Nov 23', timeframe: 'Nov 2023', value: 86 },
+  { name: 'Dec 23', timeframe: 'Dec 2023', value: 88 },
+  { name: 'Jan 24', timeframe: 'Jan 2024', value: 89 },
+  { name: 'Feb 24', timeframe: 'Feb 2024', value: 90 },
+  { name: 'Mar 24', timeframe: 'Mar 2024', value: 92 },
+  { name: 'Apr 24', timeframe: 'Apr 2024', value: 93 },
+  { name: 'May 24', timeframe: 'May 2024', value: 94 },
+  { name: 'Jun 24', timeframe: 'Jun 2024', value: 95 },
+  { name: 'Jul 24', timeframe: 'Jul 2024', value: 97 },
+  { name: 'Aug 24', timeframe: 'Aug 2024', value: 96 },
+  { name: 'Sep 24', timeframe: 'Sep 2024', value: 98 },
+  { name: 'Oct 24', timeframe: 'Oct 2024', value: 105 },
+  { name: 'Nov 24', timeframe: 'Nov 2024', value: 112 },
+  { name: 'Dec 24', timeframe: 'Dec 2024', value: 120 },
+  { name: 'Jan 25', timeframe: 'Jan 2025', value: 127 },
+  { name: 'Feb 25', timeframe: 'Feb 2025', value: 130 },
 ];
 
 const timeframeButtons = [
   { label: '3M', active: false },
   { label: '6M', active: false },
   { label: '1Y', active: true },
-  { label: '4Y', active: false },
+  { label: 'MAX', active: false },
 ];
 
 const ValuationChart = () => {
@@ -26,47 +44,30 @@ const ValuationChart = () => {
   
   // Function to filter data based on selected timeframe
   const getFilteredData = () => {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth();
+    
     switch (activeTimeframe) {
       case '3M':
-        return performanceData.filter(item => 
-          ['Start', '1M', '3M'].includes(item.name)
-        );
+        // Last 3 months of data
+        return performanceData.slice(-3);
       case '6M':
-        return performanceData.filter(item => 
-          ['Start', '1M', '3M', '6M'].includes(item.name)
-        );
+        // Last 6 months of data
+        return performanceData.slice(-6);
       case '1Y':
-        return performanceData.filter(item => 
-          ['Start', '1M', '3M', '6M', '1Y'].includes(item.name)
-        );
-      case '4Y':
+        // Last 12 months of data
+        return performanceData.slice(-12);
+      case 'MAX':
+        // All available data
         return performanceData;
       default:
-        return performanceData;
+        return performanceData.slice(-12);
     }
   };
 
   return (
-    <div className="w-full bg-white rounded-lg shadow-sm border p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Index Performance</h3>
-        <div className="flex space-x-2">
-          {timeframeButtons.map((btn) => (
-            <button
-              key={btn.label}
-              className={`px-3 py-1 rounded-md text-sm font-medium ${
-                activeTimeframe === btn.label
-                  ? 'bg-stargaze-purple text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-              onClick={() => setActiveTimeframe(btn.label)}
-            >
-              {btn.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      
+    <div className="w-full bg-white rounded-lg border p-4">
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -78,26 +79,40 @@ const ValuationChart = () => {
               bottom: 20,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis 
               dataKey="name" 
               tick={{ fontSize: 12 }}
+              tickCount={6}
+              interval="preserveStartEnd"
             />
             <YAxis 
-              domain={[100, 'auto']}
-              label={{ value: 'Index Value (Starting at 100)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' } }}
+              domain={['dataMin - 5', 'dataMax + 5']}
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 12 }}
+              tickCount={8}
             />
-            <Tooltip formatter={(value) => [`${value}`, 'Index Value']} />
-            <Legend />
+            <Tooltip 
+              formatter={(value) => [`${value}`, 'Value']} 
+              labelFormatter={(label) => `${label}`}
+              contentStyle={{ 
+                borderRadius: '4px', 
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                border: '1px solid #f0f0f0' 
+              }}
+            />
             <Line 
               type="monotone" 
               dataKey="value" 
-              stroke="#6949A7" 
+              stroke="#4CC9F0" 
               strokeWidth={2} 
-              dot={{ r: 4 }} 
-              activeDot={{ r: 6 }} 
-              name="Index Value" 
+              dot={false} 
+              activeDot={{ r: 6, fill: '#4CC9F0', stroke: '#fff', strokeWidth: 2 }} 
+              name="Fund Value" 
+              isAnimationActive={true}
             />
+            <Legend />
           </LineChart>
         </ResponsiveContainer>
       </div>

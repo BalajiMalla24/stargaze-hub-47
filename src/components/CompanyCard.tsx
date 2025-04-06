@@ -20,7 +20,7 @@ const CompanyCard = ({ logo, name, description, valuation, totalBlockSize, inves
     
   return (
     <Card 
-      className="h-full hover:shadow-md transition-shadow cursor-pointer border-t-4 border-t-stargaze-purple"
+      className="h-full hover:shadow-md transition-shadow cursor-pointer border-t-4 border-t-amber-400"
       onClick={onClick}
     >
       <CardHeader className="flex justify-center items-center pb-2">
