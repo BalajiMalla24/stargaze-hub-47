@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <div className="flex items-center gap-2">
       <img 
-        src="/lovable-uploads/e5c97128-d5dc-44e5-9df1-2f54cb41f0ef.png" 
+        src="/lovable-uploads/42fefebb-6b77-4a8e-9e3e-424539b72547.png" 
         alt="Stargaze Logo" 
         className="h-10 w-auto"
       />
