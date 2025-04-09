@@ -13,6 +13,9 @@ const Navbar = () => {
           <a href="/" className="font-medium hover:text-stargaze-purple transition-colors">
             Home
           </a>
+          <a href="/companies" className="font-medium hover:text-stargaze-purple transition-colors">
+            Companies
+          </a>
           <a href="/about" className="font-medium hover:text-stargaze-purple transition-colors">
             About
           </a>
