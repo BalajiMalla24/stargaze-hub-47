@@ -2,26 +2,27 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import Logo from './Logo';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="w-full h-20 border-b">
+    <nav className="w-full h-20 bg-white/90 backdrop-blur-sm fixed top-0 z-50 border-b">
       <div className="container mx-auto h-full flex items-center justify-between">
         <Logo />
         
         <div className="flex items-center space-x-8">
-          <a href="/" className="font-medium hover:text-stargaze-purple transition-colors">
+          <Link to="/" className="font-medium hover:text-stargaze-purple transition-colors">
             Home
-          </a>
-          <a href="/companies" className="font-medium hover:text-stargaze-purple transition-colors">
+          </Link>
+          <Link to="/companies" className="font-medium hover:text-stargaze-purple transition-colors">
             Companies
-          </a>
-          <a href="/about" className="font-medium hover:text-stargaze-purple transition-colors">
+          </Link>
+          <Link to="/about" className="font-medium hover:text-stargaze-purple transition-colors">
             About
-          </a>
-          <a href="/blog" className="font-medium hover:text-stargaze-purple transition-colors">
+          </Link>
+          <Link to="/blog" className="font-medium hover:text-stargaze-purple transition-colors">
             Blog
-          </a>
+          </Link>
         </div>
         
         <div className="flex items-center gap-4">
