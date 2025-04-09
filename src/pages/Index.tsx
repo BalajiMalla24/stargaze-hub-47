@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import IndexMethodology from '@/components/IndexMethodology';
 import EligibilityCriteria from '@/components/EligibilityCriteria';
+import ReturnCalculator from '@/components/ReturnCalculator';
 
 const Index = () => {
   // Sample performance data
@@ -73,7 +74,7 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Line Graph Section */}
+      {/* Line Graph and Calculator Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-12">
@@ -81,48 +82,55 @@ const Index = () => {
             <p className="text-gray-600">Track the historical performance of the STARGAZE Unicorn Fund</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm mb-12">
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  data={performanceData}
-                  margin={{
-                    top: 20,
-                    right: 30,
-                    left: 20,
-                    bottom: 20,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis 
-                    dataKey="name" 
-                    tick={{ fontSize: 12 }}
-                  />
-                  <YAxis 
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 12 }}
-                  />
-                  <Tooltip />
-                  <Legend />
-                  <Line 
-                    type="monotone" 
-                    dataKey="value" 
-                    name="Fund Value" 
-                    stroke="#9b87f5" 
-                    strokeWidth={3} 
-                    dot={false} 
-                    activeDot={{ r: 8 }} 
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm mb-12">
+              <div className="h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    data={performanceData}
+                    margin={{
+                      top: 20,
+                      right: 30,
+                      left: 20,
+                      bottom: 20,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis 
+                      dataKey="name" 
+                      tick={{ fontSize: 12 }}
+                    />
+                    <YAxis 
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <Tooltip />
+                    <Legend />
+                    <Line 
+                      type="monotone" 
+                      dataKey="value" 
+                      name="Fund Value" 
+                      stroke="#9b87f5" 
+                      strokeWidth={3} 
+                      dot={false} 
+                      activeDot={{ r: 8 }} 
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              
+              <div className="flex justify-center mt-4 gap-2">
+                <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">3M</button>
+                <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">6M</button>
+                <button className="px-4 py-2 text-sm font-medium rounded bg-purple-700 text-white">1Y</button>
+                <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">MAX</button>
+              </div>
             </div>
             
-            <div className="flex justify-center mt-4 gap-2">
-              <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">3M</button>
-              <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">6M</button>
-              <button className="px-4 py-2 text-sm font-medium rounded bg-purple-700 text-white">1Y</button>
-              <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">MAX</button>
+            {/* Return Calculator */}
+            <div className="lg:col-span-1">
+              <ReturnCalculator />
             </div>
           </div>
           
