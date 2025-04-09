@@ -65,7 +65,7 @@ const Index = () => {
               <p className="text-gray-600 mt-2">Portfolio Companies</p>
             </div>
             <div className="p-6 rounded-lg shadow-sm">
-              <h3 className="text-5xl font-bold text-gray-800">$215B</h3>
+              <h3 className="text-5xl font-bold text-gray-800">$100B</h3>
               <p className="text-xl text-purple-500 font-semibold">Total Value</p>
               <p className="text-gray-600 mt-2">Combined Market Cap</p>
             </div>
