@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 
+// Create a new query client instance
 const queryClient = new QueryClient();
 
 const App = () => (
