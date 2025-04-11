@@ -60,7 +60,7 @@ const Index = () => {
             </p>
             
             <Button className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg rounded-full shadow-lg">
-              Explore Fund 40
+              Explore Fund 50
             </Button>
           </div>
         </section>
@@ -201,7 +201,7 @@ const Index = () => {
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold mb-3">Strategic Portfolio Balance</h3>
                   <p className="text-gray-600">
-                    Our Fund 40 maintains optimal diversification across growth stages, 
+                    Our Fund 50 maintains optimal diversification across growth stages, 
                     sectors, and geographical regions to maximize return potential.
                   </p>
                 </CardContent>
@@ -216,7 +216,7 @@ const Index = () => {
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-800 mb-4">Eligibility Criteria</h2>
               <p className="text-gray-600">
-                The STARGAZE Fund 40 includes companies that meet our strict selection criteria
+                The STARGAZE Fund 50 includes companies that meet our strict selection criteria
               </p>
             </div>
             
@@ -248,7 +248,7 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg" asChild>
-                <Link to="/companies">Explore Fund 40</Link>
+                <Link to="/companies">Explore Fund 50</Link>
               </Button>
               <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg">
                 Request Information

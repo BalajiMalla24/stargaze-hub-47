@@ -19,15 +19,15 @@ const Companies = () => {
       <main className="flex-grow">
         <div className="py-10 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto">
-            <Tabs defaultValue="fund40">
+            <Tabs defaultValue="fund50">
               <TabsList className="mb-8">
-                <TabsTrigger value="fund40">FUND 40</TabsTrigger>
+                <TabsTrigger value="fund50">FUND 50</TabsTrigger>
                 <TabsTrigger value="allCompanies">ALL COMPANIES</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="fund40">
+              <TabsContent value="fund50">
                 <h1 className="text-5xl md:text-6xl font-bold text-amber-400">
-                  STARGAZE Unicorn Fund 40
+                  STARGAZE Unicorn Fund 50
                 </h1>
                 <div className="flex items-baseline gap-4 mt-2">
                   <span className="text-5xl font-bold text-gray-800">2340.3</span>
