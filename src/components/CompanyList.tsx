@@ -7,7 +7,7 @@ import CompanyDetail from './CompanyDetail';
 const companies = [
   {
     id: 1,
-    logo: "/lovable-uploads/da2bd597-0977-42a7-aefb-d0dcccadc324.png",
+    logo: "/lovable-uploads/93f2c498-8e7d-468c-ac7b-449c099fba6d.png",
     name: "NSE India Limited",
     description: "The National Stock Exchange of India Limited is the leading stock exchange of India, located in Mumbai. It is the world's largest derivatives exchange by number of contracts traded.",
     valuation: 13.5,
@@ -25,7 +25,7 @@ const companies = [
   },
   {
     id: 3,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/da2bd597-0977-42a7-aefb-d0dcccadc324.png",
     name: "Nayara Energy Limited",
     description: "An integrated downstream oil company with refining, marketing, production and a retail presence across India.",
     valuation: 11.2,
@@ -34,7 +34,7 @@ const companies = [
   },
   {
     id: 4,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/5c9f0670-dc85-4eed-aaa6-4a0f4a017876.png",
     name: "SBI Funds Management Limited",
     description: "One of India's largest asset management companies offering a diverse portfolio of mutual fund schemes.",
     valuation: 9.8,
@@ -43,7 +43,7 @@ const companies = [
   },
   {
     id: 5,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/50ad4651-c39d-4b22-8148-77dd10e821d2.png",
     name: "HDB Financial Services Limited",
     description: "A leading Non-Banking Financial Company (NBFC) providing a wide range of loans and asset finance products to different customer segments.",
     valuation: 7.5,
@@ -52,7 +52,7 @@ const companies = [
   },
   {
     id: 6,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/50ad4651-c39d-4b22-8148-77dd10e821d2.png",
     name: "Swiggy",
     description: "Leading food delivery platform in India connecting consumers to thousands of restaurants.",
     valuation: 10.7,
@@ -61,7 +61,7 @@ const companies = [
   },
   {
     id: 7,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/22741b4b-3d66-404a-94f3-8fa043c106d4.png",
     name: "Capgemini Technology Services India Limited",
     description: "A global leader in consulting, technology services and digital transformation.",
     valuation: 15.3,
@@ -70,7 +70,7 @@ const companies = [
   },
   {
     id: 8,
-    logo: "/placeholder.svg",
+    logo: "/lovable-uploads/9188061a-f846-443b-830f-7f498be3e5b8.png",
     name: "Waaree Energies Limited",
     description: "India's largest solar panel manufacturer and a leader in the renewable energy sector.",
     valuation: 5.8,

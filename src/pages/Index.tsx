@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -27,11 +26,11 @@ const Index = () => {
   }, []);
 
   const companyLogos = [
-    { name: 'Tata Elxsi', src: 'public/lovable-uploads/93f2c498-8e7d-468c-ac7b-449c099fba6d.png' },
-    { name: 'Delhivery', src: 'public/lovable-uploads/5c9f0670-dc85-4eed-aaa6-4a0f4a017876.png' },
-    { name: 'Swiggy', src: 'public/lovable-uploads/50ad4651-c39d-4b22-8148-77dd10e821d2.png' },
-    { name: 'Zepto', src: 'public/lovable-uploads/22741b4b-3d66-404a-94f3-8fa043c106d4.png' },
-    { name: 'FirstCry', src: 'public/lovable-uploads/9188061a-f846-443b-830f-7f498be3e5b8.png' },
+    { name: 'Tata Elxsi', src: '/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png' },
+    { name: 'Delhivery', src: '/lovable-uploads/93f2c498-8e7d-468c-ac7b-449c099fba6d.png' },
+    { name: 'Swiggy', src: '/lovable-uploads/50ad4651-c39d-4b22-8148-77dd10e821d2.png' },
+    { name: 'Zepto', src: '/lovable-uploads/22741b4b-3d66-404a-94f3-8fa043c106d4.png' },
+    { name: 'FirstCry', src: '/lovable-uploads/9188061a-f846-443b-830f-7f498be3e5b8.png' },
   ];
 
   return (
