@@ -26,11 +26,11 @@ const Index = () => {
   }, []);
 
   const companyLogos = [
-    { name: 'Tata Elxsi', src: '/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png' },
-    { name: 'Delhivery', src: '/lovable-uploads/93f2c498-8e7d-468c-ac7b-449c099fba6d.png' },
-    { name: 'Swiggy', src: '/lovable-uploads/50ad4651-c39d-4b22-8148-77dd10e821d2.png' },
-    { name: 'Zepto', src: '/lovable-uploads/22741b4b-3d66-404a-94f3-8fa043c106d4.png' },
-    { name: 'FirstCry', src: '/lovable-uploads/9188061a-f846-443b-830f-7f498be3e5b8.png' },
+    { name: 'Tata Elxsi', src: '/lovable-uploads/c00bd6e5-b212-4b7f-b44e-1a2ba50833d6.png' },
+    { name: 'Delhivery', src: '/lovable-uploads/41b83d4b-1a8b-418a-af8e-0c39ac7de3cf.png' },
+    { name: 'Swiggy', src: '/lovable-uploads/b1ead9bd-470e-47a6-ba99-561963a08f00.png' },
+    { name: 'Zepto', src: '/lovable-uploads/7f0cb945-f4f8-492b-aa1a-9cc8b2aed2d1.png' },
+    { name: 'FirstCry', src: '/lovable-uploads/65c9b09f-40fa-40fc-8300-30b3ab2fc42f.png' },
   ];
 
   return (

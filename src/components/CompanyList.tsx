@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import CompanyCard from './CompanyCard';
 import CompanyDetail from './CompanyDetail';
@@ -7,7 +6,7 @@ import CompanyDetail from './CompanyDetail';
 const companies = [
   {
     id: 1,
-    logo: "/lovable-uploads/93f2c498-8e7d-468c-ac7b-449c099fba6d.png",
+    logo: "/lovable-uploads/c00bd6e5-b212-4b7f-b44e-1a2ba50833d6.png",
     name: "NSE India Limited",
     description: "The National Stock Exchange of India Limited is the leading stock exchange of India, located in Mumbai. It is the world's largest derivatives exchange by number of contracts traded.",
     valuation: 13.5,
@@ -16,7 +15,7 @@ const companies = [
   },
   {
     id: 2,
-    logo: "/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png",
+    logo: "/lovable-uploads/c00bd6e5-b212-4b7f-b44e-1a2ba50833d6.png",
     name: "Tata Capital",
     description: "A financial services company offering a diverse range of financial products including commercial finance, infrastructure finance, and more.",
     valuation: 8.7,
@@ -25,7 +24,7 @@ const companies = [
   },
   {
     id: 3,
-    logo: "/lovable-uploads/da2bd597-0977-42a7-aefb-d0dcccadc324.png",
+    logo: "/lovable-uploads/41b83d4b-1a8b-418a-af8e-0c39ac7de3cf.png",
     name: "Nayara Energy Limited",
     description: "An integrated downstream oil company with refining, marketing, production and a retail presence across India.",
     valuation: 11.2,
@@ -43,7 +42,7 @@ const companies = [
   },
   {
     id: 5,
-    logo: "/lovable-uploads/50ad4651-c39d-4b22-8148-77dd10e821d2.png",
+    logo: "/lovable-uploads/b1ead9bd-470e-47a6-ba99-561963a08f00.png",
     name: "HDB Financial Services Limited",
     description: "A leading Non-Banking Financial Company (NBFC) providing a wide range of loans and asset finance products to different customer segments.",
     valuation: 7.5,
@@ -52,7 +51,7 @@ const companies = [
   },
   {
     id: 6,
-    logo: "/lovable-uploads/50ad4651-c39d-4b22-8148-77dd10e821d2.png",
+    logo: "/lovable-uploads/b1ead9bd-470e-47a6-ba99-561963a08f00.png",
     name: "Swiggy",
     description: "Leading food delivery platform in India connecting consumers to thousands of restaurants.",
     valuation: 10.7,
@@ -61,7 +60,7 @@ const companies = [
   },
   {
     id: 7,
-    logo: "/lovable-uploads/22741b4b-3d66-404a-94f3-8fa043c106d4.png",
+    logo: "/lovable-uploads/7f0cb945-f4f8-492b-aa1a-9cc8b2aed2d1.png",
     name: "Capgemini Technology Services India Limited",
     description: "A global leader in consulting, technology services and digital transformation.",
     valuation: 15.3,
@@ -70,7 +69,7 @@ const companies = [
   },
   {
     id: 8,
-    logo: "/lovable-uploads/9188061a-f846-443b-830f-7f498be3e5b8.png",
+    logo: "/lovable-uploads/65c9b09f-40fa-40fc-8300-30b3ab2fc42f.png",
     name: "Waaree Energies Limited",
     description: "India's largest solar panel manufacturer and a leader in the renewable energy sector.",
     valuation: 5.8,
@@ -358,7 +357,7 @@ const companies = [
   },
   {
     id: 40,
-    logo: "/lovable-uploads/81cf319b-84eb-4bc8-bd0c-634f776a43e0.png",
+    logo: "/lovable-uploads/c00bd6e5-b212-4b7f-b44e-1a2ba50833d6.png",
     name: "Indian Potash Limited",
     description: "One of the largest importers of potash in India, dealing with fertilizers and agricultural inputs.",
     valuation: 2.6,
