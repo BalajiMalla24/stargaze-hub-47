@@ -58,18 +58,30 @@ const genericCompanyData = [
   { name: 'Feb 25', timeframe: 'Feb 2025', value: 130 },
 ];
 
-const timeframeButtons = [
-  { label: '3M', active: false },
-  { label: '6M', active: false },
-  { label: '1Y', active: true },
-  { label: 'MAX', active: false },
-];
+interface TimeframeButtonProps {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}
+
+const TimeframeButton: React.FC<TimeframeButtonProps> = ({ label, active, onClick }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 text-sm font-medium rounded transition-colors ${
+        active ? 'bg-stargaze-purple text-white' : 'bg-gray-200 hover:bg-gray-300'
+      }`}
+    >
+      {label}
+    </button>
+  );
+};
 
 interface ValuationChartProps {
   companyName?: string;
 }
 
-const ValuationChart = ({ companyName }: ValuationChartProps) => {
+const ValuationChart: React.FC<ValuationChartProps> = ({ companyName }) => {
   const [activeTimeframe, setActiveTimeframe] = useState('1Y');
   
   // Use NSE data if NSE is the company, otherwise use generic data
@@ -78,8 +90,6 @@ const ValuationChart = ({ companyName }: ValuationChartProps) => {
   // Function to filter data based on selected timeframe
   const getFilteredData = () => {
     const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth();
     
     switch (activeTimeframe) {
       case '3M':
@@ -166,6 +176,29 @@ const ValuationChart = ({ companyName }: ValuationChartProps) => {
             <Legend />
           </LineChart>
         </ResponsiveContainer>
+      </div>
+      
+      <div className="flex justify-center mt-4 gap-2">
+        <TimeframeButton 
+          label="3M" 
+          active={activeTimeframe === '3M'} 
+          onClick={() => setActiveTimeframe('3M')} 
+        />
+        <TimeframeButton 
+          label="6M" 
+          active={activeTimeframe === '6M'} 
+          onClick={() => setActiveTimeframe('6M')} 
+        />
+        <TimeframeButton 
+          label="1Y" 
+          active={activeTimeframe === '1Y'} 
+          onClick={() => setActiveTimeframe('1Y')} 
+        />
+        <TimeframeButton 
+          label="MAX" 
+          active={activeTimeframe === 'MAX'} 
+          onClick={() => setActiveTimeframe('MAX')} 
+        />
       </div>
     </div>
   );
