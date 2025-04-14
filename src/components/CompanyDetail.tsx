@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ArrowUp, ArrowDown, Info, BarChart, LineChart as LineChartIcon, FileText, Calculator, Landmark, Users, Building, PieChart } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -354,7 +355,7 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
             <h4 className="font-bold mb-3">Product-level Revenue Breakdown</h4>
             <div className="h-60">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <RechartsPieChart>
                   <Pie
                     data={nseRevenueBreakdown}
                     cx="50%"
@@ -370,7 +371,7 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
                     ))}
                   </Pie>
                   <Tooltip formatter={(value) => `${value}%`} />
-                </PieChart>
+                </RechartsPieChart>
               </ResponsiveContainer>
             </div>
           </div>
@@ -404,7 +405,7 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
               <h4 className="font-bold mb-3">Net Profit margin</h4>
               <div className="h-52">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
+                  <RechartsBarChart
                     data={nseFinancialData.margins.netProfit}
                     margin={{ top: 5, right: 5, bottom: 5, left: 5 }}
                   >
@@ -413,7 +414,7 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
                     <YAxis domain={[40, 60]} />
                     <Tooltip formatter={(value) => `${value}%`} />
                     <Bar dataKey="value" fill="#FFC107" name="Net Profit Margin (%)" />
-                  </BarChart>
+                  </RechartsBarChart>
                 </ResponsiveContainer>
               </div>
             </div>
@@ -469,4 +470,119 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
                     <td className="px-4 py-2 text-sm">{nseFinancialData.margins.roe[2].value}</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-2 text-sm font-medium">EV/EBITDA
+                    <td className="px-4 py-2 text-sm font-medium">EV/EBITDA</td>
+                    <td className="px-4 py-2 text-sm">{nseFinancialData.margins.evEbitda[0].value}</td>
+                    <td className="px-4 py-2 text-sm">{nseFinancialData.margins.evEbitda[1].value}</td>
+                    <td className="px-4 py-2 text-sm">{nseFinancialData.margins.evEbitda[2].value}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
+      <div className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 bg-white p-4 border-b flex justify-between items-center z-10">
+          <div className="flex items-center gap-3">
+            <img src={company.logo} alt={company.name} className="w-12 h-12 rounded-full" />
+            <div>
+              <h2 className="text-2xl font-bold">{company.name}</h2>
+              <p className="text-sm text-gray-500">{companyInfo.industry} • {companyInfo.stage}</p>
+            </div>
+          </div>
+          <button 
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <h3 className="text-xl font-bold mb-2">Company Valuation</h3>
+              <p className="text-4xl font-bold text-amber-500 mb-1">{companyInfo.lastValuation}</p>
+              <p className="text-sm text-gray-600">Last updated: {valuationData[0].date}</p>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-medium mb-1">Founded</h3>
+                <p className="text-gray-700">{companyInfo.founded}</p>
+                <h3 className="text-lg font-medium mt-3 mb-1">Headquarters</h3>
+                <p className="text-gray-700">{companyInfo.headquarters}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-medium mb-1">Status</h3>
+                <p className="text-gray-700">{companyInfo.status}</p>
+                <h3 className="text-lg font-medium mt-3 mb-1">Price Per Share</h3>
+                <p className="text-gray-700">{companyInfo.pricePerShare}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-200 pt-6 mb-6">
+            <h3 className="text-xl font-bold mb-4">Historical Valuation</h3>
+            {/* Passing the proper company name to the ValuationChart component */}
+            <ValuationChart companyName={company.name} />
+          </div>
+          
+          <div className="border-t border-gray-200 pt-6 mb-6">
+            <h3 className="text-xl font-bold mb-4">Company Description</h3>
+            <p className="text-gray-700 leading-relaxed">{companyInfo.description}</p>
+          </div>
+          
+          {renderNseCompanyOverview()}
+          
+          <div className="border-t border-gray-200 pt-6 mb-6">
+            <h3 className="text-xl font-bold mb-4">Key Investors</h3>
+            <div className="flex flex-wrap gap-2">
+              {keyInvestors.map((investor, index) => (
+                <span key={index} className="bg-purple-50 text-purple-600 px-3 py-1 rounded-full text-sm">
+                  {investor}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-200 pt-6">
+            <h3 className="text-xl font-bold mb-4">Fundraising History</h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full border divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round</th>
+                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount (USD M)</th>
+                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post-Valuation</th>
+                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investors</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {dealHistory.map((deal, index) => (
+                    <tr key={index} className="hover:bg-gray-50">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900">{deal.round}</td>
+                      <td className="px-4 py-2 text-sm text-gray-500">{deal.date}</td>
+                      <td className="px-4 py-2 text-sm text-gray-500">${deal.amount}</td>
+                      <td className="px-4 py-2 text-sm text-gray-500">{deal.postValuation}</td>
+                      <td className="px-4 py-2 text-sm text-gray-500">{deal.investors}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CompanyDetail;
