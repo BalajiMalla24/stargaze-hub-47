@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ArrowUp, ArrowDown, Info, BarChart, LineChart as LineChartIcon, FileText, Calculator, Landmark, Users, Building, PieChart } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -53,6 +52,7 @@ interface CompanyDetailProps {
 const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
   const [chartType, setChartType] = useState<'valuation' | 'price'>('valuation');
   const [selectedTimeframe, setSelectedTimeframe] = useState<string>('1Yr');
+  const [activeTab, setActiveTab] = useState<string>('details');
   
   // NSE specific valuation data
   const nseValuationData: ValuationRecord[] = [
@@ -484,6 +484,208 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
     );
   };
 
+  // Render data room tab content
+  const renderDataRoomContent = () => {
+    return (
+      <div className="mt-6">
+        <div className="flex flex-col space-y-6">
+          <Collapsible>
+            <div className="flex items-center justify-between bg-gray-100 p-3 rounded">
+              <div className="flex items-center space-x-2">
+                <FileText className="h-5 w-5 text-purple-600" />
+                <h3 className="font-medium">Financial Documents</h3>
+              </div>
+              <CollapsibleTrigger className="p-1 rounded-full hover:bg-gray-200">
+                <ChevronIcon />
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent>
+              <div className="pl-7 pr-2 py-2">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Document Name</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Size</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {dataRoomDocuments.financials.map((doc, idx) => (
+                      <TableRow key={idx}>
+                        <TableCell className="font-medium">{doc.name}</TableCell>
+                        <TableCell>{doc.type}</TableCell>
+                        <TableCell>{doc.size}</TableCell>
+                        <TableCell>{doc.date}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+          
+          <Collapsible>
+            <div className="flex items-center justify-between bg-gray-100 p-3 rounded">
+              <div className="flex items-center space-x-2">
+                <Landmark className="h-5 w-5 text-purple-600" />
+                <h3 className="font-medium">Legal Documents</h3>
+              </div>
+              <CollapsibleTrigger className="p-1 rounded-full hover:bg-gray-200">
+                <ChevronIcon />
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent>
+              <div className="pl-7 pr-2 py-2">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Document Name</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Size</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {dataRoomDocuments.legal.map((doc, idx) => (
+                      <TableRow key={idx}>
+                        <TableCell className="font-medium">{doc.name}</TableCell>
+                        <TableCell>{doc.type}</TableCell>
+                        <TableCell>{doc.size}</TableCell>
+                        <TableCell>{doc.date}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+          
+          <Collapsible>
+            <div className="flex items-center justify-between bg-gray-100 p-3 rounded">
+              <div className="flex items-center space-x-2">
+                <Users className="h-5 w-5 text-purple-600" />
+                <h3 className="font-medium">Shareholding Documents</h3>
+              </div>
+              <CollapsibleTrigger className="p-1 rounded-full hover:bg-gray-200">
+                <ChevronIcon />
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent>
+              <div className="pl-7 pr-2 py-2">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Document Name</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Size</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {dataRoomDocuments.shareholding.map((doc, idx) => (
+                      <TableRow key={idx}>
+                        <TableCell className="font-medium">{doc.name}</TableCell>
+                        <TableCell>{doc.type}</TableCell>
+                        <TableCell>{doc.size}</TableCell>
+                        <TableCell>{doc.date}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+          
+          <Collapsible>
+            <div className="flex items-center justify-between bg-gray-100 p-3 rounded">
+              <div className="flex items-center space-x-2">
+                <Building className="h-5 w-5 text-purple-600" />
+                <h3 className="font-medium">Company Documents</h3>
+              </div>
+              <CollapsibleTrigger className="p-1 rounded-full hover:bg-gray-200">
+                <ChevronIcon />
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent>
+              <div className="pl-7 pr-2 py-2">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Document Name</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Size</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {dataRoomDocuments.official.map((doc, idx) => (
+                      <TableRow key={idx}>
+                        <TableCell className="font-medium">{doc.name}</TableCell>
+                        <TableCell>{doc.type}</TableCell>
+                        <TableCell>{doc.size}</TableCell>
+                        <TableCell>{doc.date}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+      </div>
+    );
+  };
+
+  // Render deal history tab content  
+  const renderDealHistoryContent = () => {
+    return (
+      <div className="mt-6">
+        <div className="bg-gray-50 rounded-lg p-6 mb-6">
+          <h3 className="text-xl font-bold mb-3">Funding Rounds Summary</h3>
+          <div className="h-72">
+            <ResponsiveContainer width="100%" height="100%">
+              <RechartsBarChart data={dealBarData} margin={{ top: 5, right: 30, bottom: 30, left: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" angle={-45} textAnchor="end" height={70} />
+                <YAxis label={{ value: 'Amount (USD m)', angle: -90, position: 'insideLeft' }} />
+                <Tooltip formatter={(value) => `$${value}M`} />
+                <Legend />
+                <Bar dataKey="amount" fill="#9370DB" name="Funding Amount (USD M)" />
+              </RechartsBarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        
+        <h3 className="text-xl font-bold mb-4">Detailed Funding History</h3>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Round</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Amount (USD M)</TableHead>
+                <TableHead>Post-Valuation</TableHead>
+                <TableHead>Investors</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {dealHistory.map((deal, idx) => (
+                <TableRow key={idx}>
+                  <TableCell className="font-medium">{deal.round}</TableCell>
+                  <TableCell>{deal.date}</TableCell>
+                  <TableCell>${deal.amount}</TableCell>
+                  <TableCell>{deal.postValuation}</TableCell>
+                  <TableCell>{deal.investors}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
       <div className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto">
@@ -530,58 +732,116 @@ const CompanyDetail = ({ company, onClose }: CompanyDetailProps) => {
           
           <div className="border-t border-gray-200 pt-6 mb-6">
             <h3 className="text-xl font-bold mb-4">Historical Valuation</h3>
-            {/* Passing the proper company name to the ValuationChart component */}
             <ValuationChart companyName={company.name} />
           </div>
-          
-          <div className="border-t border-gray-200 pt-6 mb-6">
-            <h3 className="text-xl font-bold mb-4">Company Description</h3>
-            <p className="text-gray-700 leading-relaxed">{companyInfo.description}</p>
-          </div>
-          
-          {renderNseCompanyOverview()}
-          
-          <div className="border-t border-gray-200 pt-6 mb-6">
-            <h3 className="text-xl font-bold mb-4">Key Investors</h3>
-            <div className="flex flex-wrap gap-2">
-              {keyInvestors.map((investor, index) => (
-                <span key={index} className="bg-purple-50 text-purple-600 px-3 py-1 rounded-full text-sm">
-                  {investor}
-                </span>
-              ))}
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-200 pt-6">
-            <h3 className="text-xl font-bold mb-4">Fundraising History</h3>
-            <div className="overflow-x-auto">
-              <table className="min-w-full border divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount (USD M)</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post-Valuation</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investors</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {dealHistory.map((deal, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900">{deal.round}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500">{deal.date}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500">${deal.amount}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500">{deal.postValuation}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500">{deal.investors}</td>
-                    </tr>
+
+          {company.name === 'NSE India Limited' ? (
+            <>
+              <div className="border-t border-gray-200 pt-6 mb-6">
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                  <TabsList className="mb-4 bg-gray-100">
+                    <TabsTrigger value="details" className="data-[state=active]:bg-purple-600 data-[state=active]:text-white">
+                      <Info className="h-4 w-4 mr-2" />
+                      Company Details
+                    </TabsTrigger>
+                    <TabsTrigger value="dataroom" className="data-[state=active]:bg-purple-600 data-[state=active]:text-white">
+                      <FileText className="h-4 w-4 mr-2" />
+                      Data Room
+                    </TabsTrigger>
+                    <TabsTrigger value="deals" className="data-[state=active]:bg-purple-600 data-[state=active]:text-white">
+                      <BarChart className="h-4 w-4 mr-2" />
+                      Deal History
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="details">
+                    <div>
+                      <h3 className="text-xl font-bold mb-4">Company Description</h3>
+                      <p className="text-gray-700 leading-relaxed">{companyInfo.description}</p>
+                      {renderNseCompanyOverview()}
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="dataroom">
+                    {renderDataRoomContent()}
+                  </TabsContent>
+                  
+                  <TabsContent value="deals">
+                    {renderDealHistoryContent()}
+                  </TabsContent>
+                </Tabs>
+              </div>
+              
+              <div className="border-t border-gray-200 pt-6 mb-6">
+                <h3 className="text-xl font-bold mb-4">Key Investors</h3>
+                <div className="flex flex-wrap gap-2">
+                  {keyInvestors.map((investor, index) => (
+                    <span key={index} className="bg-purple-50 text-purple-600 px-3 py-1 rounded-full text-sm">
+                      {investor}
+                    </span>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="border-t border-gray-200 pt-6 mb-6">
+                <h3 className="text-xl font-bold mb-4">Company Description</h3>
+                <p className="text-gray-700 leading-relaxed">{companyInfo.description}</p>
+              </div>
+              
+              <div className="border-t border-gray-200 pt-6 mb-6">
+                <h3 className="text-xl font-bold mb-4">Key Investors</h3>
+                <div className="flex flex-wrap gap-2">
+                  {keyInvestors.map((investor, index) => (
+                    <span key={index} className="bg-purple-50 text-purple-600 px-3 py-1 rounded-full text-sm">
+                      {investor}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="border-t border-gray-200 pt-6">
+                <h3 className="text-xl font-bold mb-4">Fundraising History</h3>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full border divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Round</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount (USD M)</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post-Valuation</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investors</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {dealHistory.map((deal, index) => (
+                        <tr key={index} className="hover:bg-gray-50">
+                          <td className="px-4 py-2 text-sm font-medium text-gray-900">{deal.round}</td>
+                          <td className="px-4 py-2 text-sm text-gray-500">{deal.date}</td>
+                          <td className="px-4 py-2 text-sm text-gray-500">${deal.amount}</td>
+                          <td className="px-4 py-2 text-sm text-gray-500">{deal.postValuation}</td>
+                          <td className="px-4 py-2 text-sm text-gray-500">{deal.investors}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
+  );
+};
+
+// Small helper component for the chevron icon in collapsibles
+const ChevronIcon = () => {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4">
+      <path d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+    </svg>
   );
 };
 
