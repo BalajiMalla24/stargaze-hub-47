@@ -2,8 +2,34 @@
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-// Extended sample data for the index performance to match reference image
-const performanceData = [
+// Extended historical valuation data with proper formatting for NSE
+const nseHistoricalData = [
+  { name: 'May 20', timeframe: 'May 2020', valuation: 6.5 },
+  { name: 'Jul 20', timeframe: 'Jul 2020', valuation: 7.2 },
+  { name: 'Oct 20', timeframe: 'Oct 2020', valuation: 7.8 },
+  { name: 'Jan 21', timeframe: 'Jan 2021', valuation: 10.3 },
+  { name: 'Apr 21', timeframe: 'Apr 2021', valuation: 12.8 },
+  { name: 'Jul 21', timeframe: 'Jul 2021', valuation: 15.5 },
+  { name: 'Oct 21', timeframe: 'Oct 2021', valuation: 19.2 },
+  { name: 'Jan 22', timeframe: 'Jan 2022', valuation: 23.4 },
+  { name: 'Apr 22', timeframe: 'Apr 2022', valuation: 22.8 },
+  { name: 'Aug 22', timeframe: 'Aug 2022', valuation: 19.5 },
+  { name: 'Nov 22', timeframe: 'Nov 2022', valuation: 19.8 },
+  { name: 'Feb 23', timeframe: 'Feb 2023', valuation: 20.1 },
+  { name: 'Apr 23', timeframe: 'Apr 2023', valuation: 20.3 },
+  { name: 'Jul 23', timeframe: 'Jul 2023', valuation: 20.5 },
+  { name: 'Nov 23', timeframe: 'Nov 2023', valuation: 21.2 },
+  { name: 'Feb 24', timeframe: 'Feb 2024', valuation: 28.5 },
+  { name: 'Mar 24', timeframe: 'Mar 2024', valuation: 35.8 },
+  { name: 'May 24', timeframe: 'May 2024', valuation: 36.5 },
+  { name: 'Aug 24', timeframe: 'Aug 2024', valuation: 37.2 },
+  { name: 'Nov 24', timeframe: 'Nov 2024', valuation: 52.3 },
+  { name: 'Jan 25', timeframe: 'Jan 2025', valuation: 51.8 },
+  { name: 'Mar 25', timeframe: 'Mar 2025', valuation: 52.1 },
+];
+
+// Generic company data for other companies
+const genericCompanyData = [
   { name: 'Jan 23', timeframe: 'Jan 2023', value: 100 },
   { name: 'Feb 23', timeframe: 'Feb 2023', value: 105 },
   { name: 'Mar 23', timeframe: 'Mar 2023', value: 103 },
@@ -39,8 +65,15 @@ const timeframeButtons = [
   { label: 'MAX', active: false },
 ];
 
-const ValuationChart = () => {
+interface ValuationChartProps {
+  companyName?: string;
+}
+
+const ValuationChart = ({ companyName }: ValuationChartProps) => {
   const [activeTimeframe, setActiveTimeframe] = useState('1Y');
+  
+  // Use NSE data if NSE is the company, otherwise use generic data
+  const chartData = companyName === 'NSE India Limited' ? nseHistoricalData : genericCompanyData;
   
   // Function to filter data based on selected timeframe
   const getFilteredData = () => {
@@ -51,19 +84,38 @@ const ValuationChart = () => {
     switch (activeTimeframe) {
       case '3M':
         // Last 3 months of data
-        return performanceData.slice(-3);
+        return chartData.slice(-3);
       case '6M':
         // Last 6 months of data
-        return performanceData.slice(-6);
+        return chartData.slice(-6);
       case '1Y':
         // Last 12 months of data
-        return performanceData.slice(-12);
+        return chartData.slice(-12);
       case 'MAX':
         // All available data
-        return performanceData;
+        return chartData;
       default:
-        return performanceData.slice(-12);
+        return chartData.slice(-12);
     }
+  };
+
+  // Custom tooltip component to match the screenshot
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const dataPoint = payload[0].payload;
+      const valueKey = companyName === 'NSE India Limited' ? 'valuation' : 'value';
+      const formattedValue = companyName === 'NSE India Limited' 
+        ? `$ ${(payload[0].value * 1000000000).toLocaleString('en-US', { maximumFractionDigits: 2 })}`
+        : payload[0].value;
+      
+      return (
+        <div className="bg-white p-4 border border-gray-200 rounded shadow-md">
+          <p className="text-sm font-medium">{`Date: ${dataPoint.timeframe}`}</p>
+          <p className="text-sm font-medium">{`Valuation: ${formattedValue}`}</p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -85,31 +137,30 @@ const ValuationChart = () => {
               tick={{ fontSize: 12 }}
               tickCount={6}
               interval="preserveStartEnd"
+              label={{ value: 'Month/Year', position: 'insideBottomRight', offset: -10 }}
             />
             <YAxis 
-              domain={['dataMin - 5', 'dataMax + 5']}
+              domain={companyName === 'NSE India Limited' ? [0, 'dataMax + 5'] : ['dataMin - 5', 'dataMax + 5']}
               axisLine={false}
               tickLine={false}
               tick={{ fontSize: 12 }}
               tickCount={8}
-            />
-            <Tooltip 
-              formatter={(value) => [`${value}`, 'Value']} 
-              labelFormatter={(label) => `${label}`}
-              contentStyle={{ 
-                borderRadius: '4px', 
-                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                border: '1px solid #f0f0f0' 
+              label={{ 
+                value: companyName === 'NSE India Limited' ? 'Valuation (B USD)' : 'Value', 
+                angle: -90, 
+                position: 'insideLeft',
+                style: { textAnchor: 'middle' } 
               }}
             />
+            <Tooltip content={<CustomTooltip />} />
             <Line 
               type="monotone" 
-              dataKey="value" 
-              stroke="#4CC9F0" 
+              dataKey={companyName === 'NSE India Limited' ? 'valuation' : 'value'} 
+              stroke="#6949A7" 
               strokeWidth={2} 
               dot={false} 
-              activeDot={{ r: 6, fill: '#4CC9F0', stroke: '#fff', strokeWidth: 2 }} 
-              name="Fund Value" 
+              activeDot={{ r: 6, fill: '#6949A7', stroke: '#fff', strokeWidth: 2 }} 
+              name={companyName === 'NSE India Limited' ? 'Valuation (B USD)' : 'Fund Value'} 
               isAnimationActive={true}
             />
             <Legend />
