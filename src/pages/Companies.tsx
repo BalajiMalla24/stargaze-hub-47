@@ -14,7 +14,7 @@ const Companies = () => {
   const [includingListed, setIncludingListed] = useState<'yes' | 'no'>('yes');
   const [numberOfCompanies, setNumberOfCompanies] = useState<number>(40);
   const [capWeight, setCapWeight] = useState<number>(10);
-  const [floorWeight, setFloorWeight] = useState<number>(10);
+  const [floorWeight, setFloorWeight] = useState<number>(1);
   const [transactionCostPercentage, setTransactionCostPercentage] = useState<boolean>(true);
   
   return (
@@ -104,7 +104,7 @@ const Companies = () => {
                 <div className="space-y-2">
                   <h3 className="text-sm font-medium text-gray-700">Floor Weight (%)</h3>
                   <ToggleGroup type="single" value={floorWeight.toString()} onValueChange={(value) => value && setFloorWeight(Number(value))}>
-                    {[10, 20, 30].map((weight) => (
+                    {[1, 2, 3, 5].map((weight) => (
                       <ToggleGroupItem key={weight} value={weight.toString()} aria-label={`${weight}% floor weight`}>
                         {weight}%
                       </ToggleGroupItem>
