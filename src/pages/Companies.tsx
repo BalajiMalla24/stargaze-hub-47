@@ -61,7 +61,23 @@ const Companies = () => {
         
         <div className="container mx-auto mt-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+            <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm order-2 lg:order-1">
+              <ValuationChart />
+              
+              <div className="flex justify-center mt-6 gap-2">
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">3M</button>
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">6M</button>
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-stargaze-purple text-white hover:bg-opacity-90 transition-colors">1Y</button>
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">MAX</button>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-sm order-1 lg:order-2">
+              <h2 className="text-2xl font-bold mb-6">Investment Calculator</h2>
+              <ReturnCalculator />
+            </div>
+            
+            <div className="lg:col-span-3 bg-white p-6 rounded-lg shadow-sm order-3">
               <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Fund Performance</h2>
               
               <div className="grid gap-8 mb-6">
@@ -138,20 +154,6 @@ const Companies = () => {
                   </Tabs>
                 </div>
               </div>
-
-              <ValuationChart />
-              
-              <div className="flex justify-center mt-6 gap-2">
-                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">3M</button>
-                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">6M</button>
-                <button className="px-6 py-2 text-sm font-medium rounded-full bg-stargaze-purple text-white hover:bg-opacity-90 transition-colors">1Y</button>
-                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">MAX</button>
-              </div>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h2 className="text-2xl font-bold mb-6">Investment Calculator</h2>
-              <ReturnCalculator />
             </div>
           </div>
         </div>
