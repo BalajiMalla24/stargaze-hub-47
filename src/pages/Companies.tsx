@@ -62,13 +62,13 @@ const Companies = () => {
         <div className="container mx-auto mt-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
-              <h2 className="text-2xl font-bold mb-6">Fund Performance</h2>
+              <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Fund Performance</h2>
               
-              <div className="space-y-6 mb-6">
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium text-gray-700">Transaction Cost</h3>
+              <div className="grid gap-8 mb-6">
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Transaction Cost</h3>
                   <Tabs defaultValue="with" className="w-full">
-                    <TabsList>
+                    <TabsList className="grid w-full grid-cols-2">
                       <TabsTrigger value="with" onClick={() => setTransactionCostPercentage(true)}>
                         With Transaction Cost
                       </TabsTrigger>
@@ -79,43 +79,55 @@ const Companies = () => {
                   </Tabs>
                 </div>
 
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium text-gray-700">Number of Companies</h3>
-                  <ToggleGroup type="single" value={numberOfCompanies.toString()} onValueChange={(value) => value && setNumberOfCompanies(Number(value))}>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Number of Companies</h3>
+                  <ToggleGroup type="single" value={numberOfCompanies.toString()} 
+                    onValueChange={(value) => value && setNumberOfCompanies(Number(value))}
+                    className="justify-start bg-gray-50 p-2 rounded-md">
                     {[40, 30, 20, 10].map((num) => (
-                      <ToggleGroupItem key={num} value={num.toString()} aria-label={`${num} companies`}>
+                      <ToggleGroupItem key={num} value={num.toString()} 
+                        className="px-6 data-[state=on]:bg-white data-[state=on]:shadow-sm"
+                        aria-label={`${num} companies`}>
                         {num}
                       </ToggleGroupItem>
                     ))}
                   </ToggleGroup>
                 </div>
 
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium text-gray-700">Cap Weight (%)</h3>
-                  <ToggleGroup type="single" value={capWeight.toString()} onValueChange={(value) => value && setCapWeight(Number(value))}>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Cap Weight (%)</h3>
+                  <ToggleGroup type="single" value={capWeight.toString()} 
+                    onValueChange={(value) => value && setCapWeight(Number(value))}
+                    className="justify-start bg-gray-50 p-2 rounded-md">
                     {[10, 20, 30].map((weight) => (
-                      <ToggleGroupItem key={weight} value={weight.toString()} aria-label={`${weight}% cap weight`}>
+                      <ToggleGroupItem key={weight} value={weight.toString()} 
+                        className="px-6 data-[state=on]:bg-white data-[state=on]:shadow-sm"
+                        aria-label={`${weight}% cap weight`}>
                         {weight}%
                       </ToggleGroupItem>
                     ))}
                   </ToggleGroup>
                 </div>
 
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium text-gray-700">Floor Weight (%)</h3>
-                  <ToggleGroup type="single" value={floorWeight.toString()} onValueChange={(value) => value && setFloorWeight(Number(value))}>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Floor Weight (%)</h3>
+                  <ToggleGroup type="single" value={floorWeight.toString()} 
+                    onValueChange={(value) => value && setFloorWeight(Number(value))}
+                    className="justify-start bg-gray-50 p-2 rounded-md">
                     {[1, 2, 3, 5].map((weight) => (
-                      <ToggleGroupItem key={weight} value={weight.toString()} aria-label={`${weight}% floor weight`}>
+                      <ToggleGroupItem key={weight} value={weight.toString()} 
+                        className="px-6 data-[state=on]:bg-white data-[state=on]:shadow-sm"
+                        aria-label={`${weight}% floor weight`}>
                         {weight}%
                       </ToggleGroupItem>
                     ))}
                   </ToggleGroup>
                 </div>
 
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium text-gray-700">Including Listed</h3>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Including Listed</h3>
                   <Tabs defaultValue="yes" className="w-full">
-                    <TabsList>
+                    <TabsList className="grid w-full grid-cols-2">
                       <TabsTrigger value="yes" onClick={() => setIncludingListed('yes')}>
                         Yes
                       </TabsTrigger>
@@ -129,11 +141,11 @@ const Companies = () => {
 
               <ValuationChart />
               
-              <div className="flex justify-center mt-4 gap-2">
-                <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">3M</button>
-                <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">6M</button>
-                <button className="px-4 py-2 text-sm font-medium rounded bg-stargaze-purple text-white">1Y</button>
-                <button className="px-4 py-2 text-sm font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors">MAX</button>
+              <div className="flex justify-center mt-6 gap-2">
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">3M</button>
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">6M</button>
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-stargaze-purple text-white hover:bg-opacity-90 transition-colors">1Y</button>
+                <button className="px-6 py-2 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">MAX</button>
               </div>
             </div>
             
