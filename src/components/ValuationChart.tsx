@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 // Extended sample data for the index performance to match reference image
@@ -32,46 +31,13 @@ const performanceData = [
   { name: 'Feb 25', timeframe: 'Feb 2025', value: 130 },
 ];
 
-const timeframeButtons = [
-  { label: '3M', active: false },
-  { label: '6M', active: false },
-  { label: '1Y', active: true },
-  { label: 'MAX', active: false },
-];
-
 const ValuationChart = () => {
-  const [activeTimeframe, setActiveTimeframe] = useState('1Y');
-  
-  // Function to filter data based on selected timeframe
-  const getFilteredData = () => {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth();
-    
-    switch (activeTimeframe) {
-      case '3M':
-        // Last 3 months of data
-        return performanceData.slice(-3);
-      case '6M':
-        // Last 6 months of data
-        return performanceData.slice(-6);
-      case '1Y':
-        // Last 12 months of data
-        return performanceData.slice(-12);
-      case 'MAX':
-        // All available data
-        return performanceData;
-      default:
-        return performanceData.slice(-12);
-    }
-  };
-
   return (
-    <div className="w-full bg-white rounded-lg border p-4">
+    <div className="w-full bg-white rounded-lg">
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            data={getFilteredData()}
+            data={performanceData}
             margin={{
               top: 20,
               right: 30,
