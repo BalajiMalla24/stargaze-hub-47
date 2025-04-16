@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { cn } from "@/lib/utils";
 
 // Extended sample data for the index performance to match reference image
 const performanceData = [
@@ -31,6 +33,23 @@ const performanceData = [
   { name: 'Feb 25', timeframe: 'Feb 2025', value: 130 },
 ];
 
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
+        <p className="font-medium text-gray-600">{label}</p>
+        <p className="text-lg font-bold text-purple-600">
+          Value: {payload[0].value.toFixed(2)}
+        </p>
+        <p className="text-sm text-gray-500">
+          {payload[0].payload.timeframe}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 const ValuationChart = () => {
   return (
     <div className="w-full bg-white rounded-lg">
@@ -48,37 +67,53 @@ const ValuationChart = () => {
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis 
               dataKey="name" 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#6b7280' }}
+              tickLine={{ stroke: '#e5e7eb' }}
+              axisLine={{ stroke: '#e5e7eb' }}
               tickCount={6}
               interval="preserveStartEnd"
             />
             <YAxis 
               domain={['dataMin - 5', 'dataMax + 5']}
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 12 }}
+              axisLine={{ stroke: '#e5e7eb' }}
+              tickLine={{ stroke: '#e5e7eb' }}
+              tick={{ fontSize: 12, fill: '#6b7280' }}
               tickCount={8}
+              tickFormatter={(value) => `${value}`}
             />
             <Tooltip 
-              formatter={(value) => [`${value}`, 'Value']} 
-              labelFormatter={(label) => `${label}`}
-              contentStyle={{ 
-                borderRadius: '4px', 
-                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                border: '1px solid #f0f0f0' 
-              }}
+              content={<CustomTooltip />}
+              cursor={{ stroke: '#9ca3af', strokeWidth: 1, strokeDasharray: '4 4' }}
             />
+            <defs>
+              <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.1}/>
+                <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
             <Line 
               type="monotone" 
               dataKey="value" 
-              stroke="#4CC9F0" 
-              strokeWidth={2} 
+              stroke="#8b5cf6" 
+              strokeWidth={3} 
               dot={false} 
-              activeDot={{ r: 6, fill: '#4CC9F0', stroke: '#fff', strokeWidth: 2 }} 
+              activeDot={{ 
+                r: 6, 
+                fill: '#8b5cf6', 
+                stroke: '#fff', 
+                strokeWidth: 2 
+              }} 
               name="Fund Value" 
               isAnimationActive={true}
+              fill="url(#colorValue)"
             />
-            <Legend />
+            <Legend 
+              wrapperStyle={{
+                paddingTop: '20px',
+                fontSize: '14px',
+                color: '#4b5563'
+              }}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>
@@ -87,3 +122,4 @@ const ValuationChart = () => {
 };
 
 export default ValuationChart;
+
