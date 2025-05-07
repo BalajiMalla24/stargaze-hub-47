@@ -50,7 +50,7 @@ const Index = () => {
   const stats = [
     { value: '50+', label: 'Curated Companies' },
     { value: '₹250Cr+', label: 'Assets Tracked' },
-    { value: '27.5%', label: 'YoY Returns' },
+    { value: '19%', label: 'YoY Returns' },  // Updated from 27.5% to 19%
     { value: '4000+', label: 'Qualified Investors' }
   ];
 
@@ -231,14 +231,6 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="flex justify-center mb-16">
-              <img 
-                src="/lovable-uploads/f90b5c06-523c-438d-a425-011249abdf6c.png" 
-                alt="Index Construction Flow" 
-                className="max-w-3xl w-full shadow-lg rounded-lg"
-              />
-            </div>
-            
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="border-t-4 border-t-stargaze-purple hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
@@ -322,22 +314,6 @@ const Index = () => {
       </main>
       
       <Footer />
-      
-      {/* Add animation styles */}
-      <style jsx>{`
-        @keyframes ticker-scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
-        }
-        
-        .animate-ticker {
-          animation: ticker-scroll var(--ticker-animation-duration, 40s) linear infinite;
-        }
-      `}</style>
     </div>
   );
 };

@@ -12,6 +12,16 @@ import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from "@/components/ui/table";
 
 const Companies = () => {
   // Get current date for the "Updated" timestamp
@@ -40,7 +50,7 @@ const Companies = () => {
                 </h1>
                 <div className="flex items-baseline gap-4 mt-2">
                   <span className="text-5xl font-bold text-gray-800">2340.3</span>
-                  <span className="text-2xl font-semibold text-green-500">+27.5%</span>
+                  <span className="text-2xl font-semibold text-green-500">+19.0%</span>
                 </div>
                 <p className="text-sm text-purple-600 mt-1">
                   Updated {formattedDate} GMT+8
@@ -53,7 +63,7 @@ const Companies = () => {
                 </h1>
                 <div className="flex items-baseline gap-4 mt-2">
                   <span className="text-5xl font-bold text-gray-800">1850.6</span>
-                  <span className="text-2xl font-semibold text-green-500">+22.3%</span>
+                  <span className="text-2xl font-semibold text-green-500">+19.0%</span>
                 </div>
                 <p className="text-sm text-purple-600 mt-1">
                   Updated {formattedDate} GMT+8
@@ -64,11 +74,45 @@ const Companies = () => {
         </div>
         
         <div className="container mx-auto mt-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Investment Calculator */}
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h2 className="text-2xl font-bold mb-6">Investment Calculator</h2>
               <ReturnCalculator />
+            </div>
+
+            {/* Configuration Table */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h2 className="text-2xl font-bold mb-6">Fund Configuration</h2>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Parameter</TableHead>
+                    <TableHead>Value</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Transaction Cost</TableCell>
+                    <TableCell>Yes</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Including Listed</TableCell>
+                    <TableCell>Yes</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Number of Companies</TableCell>
+                    <TableCell>40, 30, 20</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Cap Weight</TableCell>
+                    <TableCell>10%, 20%, 30%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Floor Weight</TableCell>
+                    <TableCell>1%, 2%, 3%, 5%</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </div>
 
             {/* Fund Performance */}
