@@ -1,28 +1,42 @@
-import React, { useEffect, useRef } from 'react';
+
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, ChartLine } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import CompanyTicker from '@/components/CompanyTicker';
+import IndexFundExplainer from '@/components/IndexFundExplainer';
 
 const Index = () => {
-  const logosRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const featuredRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const logos = logosRef.current;
-    if (!logos) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    // Simple animation for logos
-    const animateLogos = () => {
-      const children = Array.from(logos.children);
-      children.forEach((child, index) => {
-        (child as HTMLElement).style.animationDelay = `${index * 0.2}s`;
-        (child as HTMLElement).classList.add('animate-fade-in');
-      });
+    const currentFeaturedRef = featuredRef.current;
+    if (currentFeaturedRef) {
+      observer.observe(currentFeaturedRef);
+    }
+
+    return () => {
+      if (currentFeaturedRef) {
+        observer.unobserve(currentFeaturedRef);
+      }
     };
-
-    animateLogos();
   }, []);
 
   const companyLogos = [
@@ -33,44 +47,86 @@ const Index = () => {
     { name: 'FirstCry', src: '/lovable-uploads/65c9b09f-40fa-40fc-8300-30b3ab2fc42f.png' },
   ];
 
+  const stats = [
+    { value: '50+', label: 'Curated Companies' },
+    { value: '₹250Cr+', label: 'Assets Tracked' },
+    { value: '27.5%', label: 'YoY Returns' },
+    { value: '4000+', label: 'Qualified Investors' }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
+      {/* Ticker with company performances */}
+      <CompanyTicker />
+      
       <main className="flex-grow">
-        {/* Hero Section - Full-width background image with purple gradient */}
-        <section className="relative h-[80vh] bg-cover bg-center flex items-center" 
+        {/* Hero Section - Professional full-width background with gradient overlay */}
+        <section className="relative h-[90vh] bg-cover bg-center flex items-center" 
           style={{ 
-            backgroundImage: 'linear-gradient(rgba(105, 73, 167, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)' 
+            backgroundImage: 'linear-gradient(rgba(26, 32, 44, 0.8), rgba(0, 0, 0, 0.9)), url(https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)'
           }}>
-          <div className="container mx-auto px-4 text-center text-white">
+          <div className="container mx-auto px-4 text-left lg:ml-20">
             <div className="inline-block bg-black/30 backdrop-blur-sm px-6 py-2 rounded-full mb-6">
-              <span className="text-stargaze-gold font-medium">Insights</span>
-              <span className="mx-4">|</span>
-              <span>Why private equity belongs in a 2025 portfolio</span>
+              <span className="text-stargaze-gold font-medium">Launching May 2025</span>
+              <span className="mx-4 text-gray-400">|</span>
+              <span className="text-white">Early access now open</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-5xl mx-auto leading-tight">
-              Because in private equity diversification matters.
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-4xl leading-tight text-white">
+              The future of <span className="text-stargaze-gold">private equity</span> investing is here.
             </h1>
             
-            <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
-              Access diverse, top-tier private equity opportunities, 
-              hard to come by anywhere else.
+            <p className="text-xl md:text-2xl mb-10 max-w-2xl text-gray-200">
+              STARGAZE Index 50 gives you access to a curated portfolio of India's most promising private companies.
             </p>
             
-            <Button className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg rounded-full shadow-lg">
-              Explore Fund 50
-            </Button>
+            <div className="flex flex-wrap gap-4">
+              <Button asChild className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg rounded-full shadow-lg">
+                <Link to="/companies">Explore Index 50</Link>
+              </Button>
+              
+              <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg rounded-full">
+                Learn More
+              </Button>
+            </div>
+          </div>
+          
+          {/* Stats overlay */}
+          <div 
+            ref={statsRef}
+            className="absolute bottom-0 left-0 w-full bg-black/30 backdrop-blur-md py-6 border-t border-gray-700"
+          >
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                {stats.map((stat, index) => (
+                  <div key={index} className="text-white">
+                    <div className="text-3xl md:text-4xl font-bold text-stargaze-gold mb-1">{stat.value}</div>
+                    <div className="text-sm text-gray-300">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Featured Partners Section - with animated logos */}
+        {/* Featured Companies Section - with animated logos */}
         <section className="py-12 bg-white border-b">
           <div className="container mx-auto px-4">
-            <div ref={logosRef} className="grid grid-cols-2 md:grid-cols-5 gap-12 items-center justify-items-center">
+            <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">Featured in our Index 50</h2>
+            <div 
+              ref={featuredRef}
+              className="grid grid-cols-2 md:grid-cols-5 gap-12 items-center justify-items-center"
+            >
               {companyLogos.map((company, index) => (
-                <div key={index} className="transition-all duration-500 hover:scale-110 w-32 h-16 flex items-center justify-center">
+                <div 
+                  key={index} 
+                  className={`transition-all duration-500 hover:scale-110 w-32 h-16 flex items-center justify-center transform ${
+                    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                  }`}
+                  style={{ transitionDelay: `${index * 0.1}s` }}
+                >
                   <img 
                     src={company.src} 
                     alt={company.name} 
@@ -81,19 +137,21 @@ const Index = () => {
             </div>
           </div>
         </section>
+        
+        {/* Index Fund Explainer Section */}
+        <IndexFundExplainer />
 
-        {/* Split Section - Left content, right benefits */}
+        {/* How It Works Section */}
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8 leading-tight">
-                  STARGAZE is transparent, centralized, and easy.
+                  Invest in unicorns before they go public.
                 </h2>
                 <p className="text-xl text-gray-600 mb-8">
-                  Investing in private markets the traditional way is a lot of work. 
                   STARGAZE gives you simple and direct access to one central place 
-                  for qualified participants.
+                  for qualified participants to invest in India's top private companies.
                 </p>
                 <Button className="bg-stargaze-purple hover:bg-stargaze-purple/90 text-white px-8 py-6 text-lg">
                   Get Started
@@ -106,13 +164,10 @@ const Index = () => {
                   <CardContent className="p-8">
                     <div className="flex items-start gap-6">
                       <div className="bg-stargaze-purple/10 p-3 rounded-full">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-stargaze-purple">
-                          <path d="M3 3V21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M7 14L11 10L15 14L21 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
+                        <ChartLine className="h-6 w-6 text-stargaze-purple" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-semibold mb-2">Discover market pricing</h3>
+                        <h3 className="text-2xl font-semibold mb-2">Access market intelligence</h3>
                         <p className="text-gray-600">
                           View current and historical data on valuations and private market transactions. 
                           Best of all, there is no charge to access STARGAZE's comprehensive data.
@@ -132,10 +187,10 @@ const Index = () => {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="text-2xl font-semibold mb-2">Access the market directly</h3>
+                        <h3 className="text-2xl font-semibold mb-2">Invest directly</h3>
                         <p className="text-gray-600">
-                          Connect directly with a deep pool of verified investors and 
-                          stay in control from start to finish.
+                          Connect directly with a deep pool of verified companies and 
+                          stay in control of your investments from start to finish.
                         </p>
                       </div>
                     </div>
@@ -152,10 +207,10 @@ const Index = () => {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="text-2xl font-semibold mb-2">Automate your investment</h3>
+                        <h3 className="text-2xl font-semibold mb-2">Strategic investment</h3>
                         <p className="text-gray-600">
                           Streamline your investment process with automated portfolio management tools. 
-                          Standardize your strategy and optimize your returns effortlessly.
+                          Create a strategy based on our proprietary algorithms and research.
                         </p>
                       </div>
                     </div>
@@ -166,14 +221,22 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Methodology Section */}
+        {/* Index Construction */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Investment Philosophy</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">Index Construction Methodology</h2>
               <p className="text-gray-600">
-                We connect investors with premium private equity opportunities through a rigorously developed investment framework.
+                Our Index 50 is constructed using a rigorous methodology to ensure it represents the most promising private companies.
               </p>
+            </div>
+            
+            <div className="flex justify-center mb-16">
+              <img 
+                src="/lovable-uploads/f90b5c06-523c-438d-a425-011249abdf6c.png" 
+                alt="Index Construction Flow" 
+                className="max-w-3xl w-full shadow-lg rounded-lg"
+              />
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -201,7 +264,7 @@ const Index = () => {
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold mb-3">Strategic Portfolio Balance</h3>
                   <p className="text-gray-600">
-                    Our Fund 50 maintains optimal diversification across growth stages, 
+                    Our Index 50 maintains optimal diversification across growth stages, 
                     sectors, and geographical regions to maximize return potential.
                   </p>
                 </CardContent>
@@ -216,7 +279,7 @@ const Index = () => {
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-800 mb-4">Eligibility Criteria</h2>
               <p className="text-gray-600">
-                The STARGAZE Fund 50 includes companies that meet our strict selection criteria
+                The STARGAZE Index 50 includes companies that meet our strict selection criteria
               </p>
             </div>
             
@@ -248,7 +311,7 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg" asChild>
-                <Link to="/companies">Explore Fund 50</Link>
+                <Link to="/companies">Explore Index 50</Link>
               </Button>
               <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg">
                 Request Information
@@ -259,6 +322,22 @@ const Index = () => {
       </main>
       
       <Footer />
+      
+      {/* Add animation styles */}
+      <style jsx>{`
+        @keyframes ticker-scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+        
+        .animate-ticker {
+          animation: ticker-scroll var(--ticker-animation-duration, 40s) linear infinite;
+        }
+      `}</style>
     </div>
   );
 };
