@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -49,7 +50,7 @@ const Index = () => {
   const stats = [
     { value: '50+', label: 'Curated Companies' },
     { value: '₹250Cr+', label: 'Assets Tracked' },
-    { value: '19%', label: 'YoY Returns' },  // Updated from 27.5% to 19%
+    { value: '19%', label: 'YoY Returns' },
     { value: '4000+', label: 'Qualified Investors' }
   ];
 
@@ -61,32 +62,32 @@ const Index = () => {
       <CompanyTicker />
       
       <main className="flex-grow">
-        {/* Hero Section - Changed background to light purple */}
+        {/* Hero Section - Updated with improved color scheme */}
         <section className="relative h-[90vh] bg-cover bg-center flex items-center" 
           style={{ 
-            backgroundImage: 'linear-gradient(rgba(214, 188, 250, 0.9), rgba(214, 188, 250, 0.8)), url(https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)'
+            backgroundImage: 'linear-gradient(to bottom, rgba(230, 210, 255, 0.95), rgba(214, 188, 250, 0.85))'
           }}>
           <div className="container mx-auto px-4 text-left lg:ml-20">
-            <div className="inline-block bg-purple-100/70 backdrop-blur-sm px-6 py-2 rounded-full mb-6">
-              <span className="text-stargaze-gold font-medium">Launching May 2025</span>
+            <div className="inline-block bg-white/70 backdrop-blur-sm px-6 py-2 rounded-full mb-6">
+              <span className="text-purple-600 font-medium">Launching May 2025</span>
               <span className="mx-4 text-gray-500">|</span>
               <span className="text-gray-700">Early access now open</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-4xl leading-tight text-gray-800">
-              The future of <span className="text-stargaze-gold">private equity</span> investing is here.
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-4xl leading-tight text-purple-900">
+              The future of <span className="text-purple-600">private equity</span> investing is here.
             </h1>
             
-            <p className="text-xl md:text-2xl mb-10 max-w-2xl text-gray-700">
+            <p className="text-xl md:text-2xl mb-10 max-w-2xl text-purple-800">
               STARGAZE Index 50 gives you access to a curated portfolio of India's most promising private companies.
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <Button asChild className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg rounded-full shadow-lg">
+              <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-8 py-6 text-lg rounded-full shadow-lg">
                 <Link to="/companies">Explore Index 50</Link>
               </Button>
               
-              <Button variant="outline" className="border-gray-700 text-gray-700 hover:bg-purple-200/50 px-8 py-6 text-lg rounded-full">
+              <Button variant="outline" className="border-purple-700 text-purple-700 hover:bg-purple-100 px-8 py-6 text-lg rounded-full">
                 Learn More
               </Button>
             </div>
@@ -95,13 +96,13 @@ const Index = () => {
           {/* Stats overlay */}
           <div 
             ref={statsRef}
-            className="absolute bottom-0 left-0 w-full bg-purple-200/50 backdrop-blur-md py-6 border-t border-purple-300"
+            className="absolute bottom-0 left-0 w-full bg-white/50 backdrop-blur-md py-6 border-t border-purple-200"
           >
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-gray-700">
-                    <div className="text-3xl md:text-4xl font-bold text-stargaze-gold mb-1">{stat.value}</div>
+                    <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-1">{stat.value}</div>
                     <div className="text-sm text-gray-700">{stat.label}</div>
                   </div>
                 ))}
