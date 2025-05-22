@@ -75,7 +75,7 @@ const Index = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-4xl leading-tight text-purple-900">
-              Bringing index-style access to the <span className="text-amber-500">private markets</span> — curated, data-backed, and growth-focused.
+              Bringing index-style access to the <span className="text-amber-500">private markets</span>.
             </h1>
             
             <p className="text-xl md:text-2xl mb-10 max-w-2xl text-purple-800">
