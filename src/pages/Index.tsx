@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -51,12 +52,11 @@ const Index = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-5xl mx-auto leading-tight">
-              Because in private equity diversification matters.
+              Bringing index-style access to the private markets.
             </h1>
             
             <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
-              Access diverse, top-tier private equity opportunities, 
-              hard to come by anywhere else.
+              Curated, data-backed, and growth-focused.
             </p>
             
             <Button className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg rounded-full shadow-lg">
