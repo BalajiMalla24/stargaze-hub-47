@@ -26,7 +26,7 @@ const Companies = () => {
       <Navbar />
       
       <main className="flex-grow">
-        <div className="py-10 bg-gradient-to-b from-purple-100 to-white">
+        <div className="py-10 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto">
             <Tabs defaultValue="fund50">
               <TabsList className="mb-8">
@@ -40,7 +40,7 @@ const Companies = () => {
                 </h1>
                 <div className="flex items-baseline gap-4 mt-2">
                   <span className="text-5xl font-bold text-gray-800">2340.3</span>
-                  <span className="text-2xl font-semibold text-green-500">+19.0%</span>
+                  <span className="text-2xl font-semibold text-green-500">+27.5%</span>
                 </div>
                 <p className="text-sm text-purple-600 mt-1">
                   Updated {formattedDate} GMT+8
@@ -53,7 +53,7 @@ const Companies = () => {
                 </h1>
                 <div className="flex items-baseline gap-4 mt-2">
                   <span className="text-5xl font-bold text-gray-800">1850.6</span>
-                  <span className="text-2xl font-semibold text-green-500">+19.0%</span>
+                  <span className="text-2xl font-semibold text-green-500">+22.3%</span>
                 </div>
                 <p className="text-sm text-purple-600 mt-1">
                   Updated {formattedDate} GMT+8
@@ -64,9 +64,15 @@ const Companies = () => {
         </div>
         
         <div className="container mx-auto mt-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Fund Performance on the left (2 cols) */}
-            <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Investment Calculator */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h2 className="text-2xl font-bold mb-6">Investment Calculator</h2>
+              <ReturnCalculator />
+            </div>
+
+            {/* Fund Performance */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Fund Performance</h2>
                 <div className="flex gap-2">
@@ -120,11 +126,6 @@ const Companies = () => {
                 </div>
               </div>
               <ValuationChart />
-            </div>
-
-            {/* Investment Calculator on the right (1 col) */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <ReturnCalculator />
             </div>
           </div>
         </div>

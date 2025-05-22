@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import ValuationChart from '@/components/ValuationChart';
@@ -12,6 +11,16 @@ import { Button } from "@/components/ui/button";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from "@/components/ui/table"
 
 const Companies = () => {
   // Get current date for the "Updated" timestamp
@@ -26,7 +35,7 @@ const Companies = () => {
       <Navbar />
       
       <main className="flex-grow">
-        <div className="py-10 bg-gradient-to-b from-purple-100 to-white">
+        <div className="py-10 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto">
             <Tabs defaultValue="fund50">
               <TabsList className="mb-8">
@@ -65,8 +74,48 @@ const Companies = () => {
         
         <div className="container mx-auto mt-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Fund Performance on the left (2 cols) */}
-            <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+            {/* Investment Calculator */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <ReturnCalculator />
+            </div>
+
+            {/* Configuration Table */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h2 className="text-2xl font-bold mb-6">Fund Configuration</h2>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Parameter</TableHead>
+                    <TableHead>Value</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Transaction Cost</TableCell>
+                    <TableCell>Yes</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Including Listed</TableCell>
+                    <TableCell>Yes</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Number of Companies</TableCell>
+                    <TableCell>40, 30, 20</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Cap Weight</TableCell>
+                    <TableCell>10%, 20%, 30%</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Floor Weight</TableCell>
+                    <TableCell>1%, 2%, 3%, 5%</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Fund Performance */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Fund Performance</h2>
                 <div className="flex gap-2">
@@ -120,11 +169,6 @@ const Companies = () => {
                 </div>
               </div>
               <ValuationChart />
-            </div>
-
-            {/* Investment Calculator on the right (1 col) */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <ReturnCalculator />
             </div>
           </div>
         </div>
