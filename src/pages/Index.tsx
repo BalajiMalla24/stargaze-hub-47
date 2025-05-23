@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -12,25 +12,43 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow">
-        {/* Hero Section - Updated with financial market background pattern */}
-        <section className="relative overflow-hidden" style={{ minHeight: '85vh' }}>
-          {/* Financial chart background pattern */}
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-sky-50 to-blue-50 z-0">
-            <div className="absolute inset-0 opacity-10" 
-              style={{ 
-                backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0,50 Q25,30 50,50 T100,50 T150,50 T200,50\' stroke=\'%234b72b0\' stroke-width=\'2\' fill=\'none\' /%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0,70 Q35,40 70,70 T140,70 T210,70\' stroke=\'%233b5998\' stroke-width=\'2\' fill=\'none\' /%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0,90 Q45,50 90,90 T180,90 T270,90\' stroke=\'%236949A7\' stroke-width=\'2\' fill=\'none\' /%3E%3C/svg%3E")',
-                backgroundSize: '400px 200px, 600px 300px, 800px 400px',
-                backgroundRepeat: 'repeat-x',
-              }}
-            ></div>
+      <main className="flex-grow pt-20"> {/* Added padding-top to prevent content from being hidden under navbar */}
+        {/* Hero Section - Updated with better background and positioning */}
+        <section className="relative overflow-hidden" style={{ minHeight: '80vh' }}>
+          {/* Financial chart background pattern - lighter with brand colors */}
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 z-0">
+            {/* Abstract chart lines and patterns */}
+            <div className="absolute inset-0 opacity-10">
+              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" className="text-stargaze-purple">
+                <path 
+                  d="M0,100 Q150,20 300,100 T600,100 T900,100 T1200,100" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  fill="none" 
+                />
+                <path 
+                  d="M0,150 Q200,50 400,150 T800,150 T1200,150" 
+                  stroke="currentColor" 
+                  strokeWidth="1.5" 
+                  fill="none" 
+                  opacity="0.5"
+                />
+                <path 
+                  d="M0,200 Q250,80 500,200 T1000,200 T1500,200" 
+                  stroke="currentColor" 
+                  strokeWidth="1" 
+                  fill="none" 
+                  opacity="0.3"
+                />
+              </svg>
+            </div>
             
-            {/* Financial candles/bars pattern */}
+            {/* Financial graph dots/markers pattern */}
             <div className="absolute inset-0 opacity-5">
               {Array.from({ length: 50 }).map((_, i) => (
                 <div 
                   key={i} 
-                  className="absolute bg-gray-500"
+                  className="absolute bg-stargaze-purple"
                   style={{
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
@@ -71,27 +89,39 @@ const Index = () => {
           </div>
           
           {/* Stock ticker at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gray-100/80 backdrop-blur-sm py-2 overflow-hidden z-10">
-            <div className="flex gap-4 animate-[slide_30s_linear_infinite]">
+          <div className="absolute bottom-0 left-0 right-0 bg-white/70 backdrop-blur-sm py-3 overflow-hidden z-10">
+            <div className="flex gap-8 stock-ticker">
               <div className="flex items-center whitespace-nowrap gap-1">
                 <span className="font-medium">SpaceX</span>
                 <span className="text-green-600">$388.94B ↑</span>
-              </div>
-              <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">Swiggy</span>
-                <span className="text-green-600">$27.81B ↑</span>
-              </div>
-              <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">Neuralink</span>
-                <span className="text-green-600">$10.87B ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
                 <span className="font-medium">ByteDance</span>
                 <span className="text-green-600">$266.17B ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">Stripe</span>
+                <span className="text-green-600">$65.48B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">Klarna</span>
+                <span className="text-green-600">$12.75B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
                 <span className="font-medium">FirstCry</span>
                 <span className="text-red-600">$4.34B ↓</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">SpaceX</span>
+                <span className="text-green-600">$388.94B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">ByteDance</span>
+                <span className="text-green-600">$266.17B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">Stripe</span>
+                <span className="text-green-600">$65.48B ↑</span>
               </div>
             </div>
           </div>

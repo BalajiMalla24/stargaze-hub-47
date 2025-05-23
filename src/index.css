@@ -109,3 +109,8 @@
     transform: translateX(-100%);
   }
 }
+
+.stock-ticker {
+  animation: slide 30s linear infinite;
+}
+
