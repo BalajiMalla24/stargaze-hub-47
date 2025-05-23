@@ -39,29 +39,164 @@ const Index = () => {
       <Navbar />
       
       <main className="flex-grow">
-        {/* Hero Section - Full-width background image with purple gradient */}
-        <section className="relative h-[80vh] bg-cover bg-center flex items-center" 
-          style={{ 
-            backgroundImage: 'linear-gradient(rgba(105, 73, 167, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)' 
-          }}>
-          <div className="container mx-auto px-4 text-center text-white">
-            <div className="inline-block bg-black/30 backdrop-blur-sm px-6 py-2 rounded-full mb-6">
-              <span className="text-stargaze-gold font-medium">Insights</span>
-              <span className="mx-4">|</span>
-              <span>Why private equity belongs in a 2025 portfolio</span>
+        {/* Hero Section - Updated with financial market background pattern */}
+        <section className="relative overflow-hidden" style={{ minHeight: '85vh' }}>
+          {/* Financial chart background pattern */}
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-sky-50 to-blue-50 z-0">
+            <div className="absolute inset-0 opacity-10" 
+              style={{ 
+                backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0,50 Q25,30 50,50 T100,50 T150,50 T200,50\' stroke=\'%234b72b0\' stroke-width=\'2\' fill=\'none\' /%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0,70 Q35,40 70,70 T140,70 T210,70\' stroke=\'%233b5998\' stroke-width=\'2\' fill=\'none\' /%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0,90 Q45,50 90,90 T180,90 T270,90\' stroke=\'%236949A7\' stroke-width=\'2\' fill=\'none\' /%3E%3C/svg%3E")',
+                backgroundSize: '400px 200px, 600px 300px, 800px 400px',
+                backgroundRepeat: 'repeat-x',
+              }}
+            ></div>
+            
+            {/* Financial candles/bars pattern */}
+            <div className="absolute inset-0 opacity-5">
+              {Array.from({ length: 50 }).map((_, i) => (
+                <div 
+                  key={i} 
+                  className="absolute bg-gray-500"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    width: '2px',
+                    height: `${Math.random() * 50 + 20}px`,
+                  }}
+                ></div>
+              ))}
             </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-5xl mx-auto leading-tight">
-              Bringing index-style access to the private markets.
-            </h1>
-            
-            <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
-              Curated, data-backed, and growth-focused.
-            </p>
-            
-            <Button className="bg-stargaze-gold hover:bg-stargaze-gold/90 text-black font-bold px-8 py-6 text-lg rounded-full shadow-lg">
-              Explore Fund 50
-            </Button>
+          </div>
+
+          {/* Content container */}
+          <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center h-full py-16">
+            {/* Left side text content */}
+            <div className="md:w-1/2 space-y-6 text-left mb-12 md:mb-0 mt-16 md:mt-0">
+              <div className="inline-block bg-black/5 backdrop-blur-sm px-6 py-2 rounded-full mb-2">
+                <span className="text-stargaze-gold font-medium">Insights</span>
+                <span className="mx-4">|</span>
+                <span>Why private equity belongs in a 2025 portfolio</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-teal-900 leading-tight">
+                Private Markets,<br/>Reimagined.
+              </h1>
+              
+              <p className="text-lg md:text-xl lg:text-2xl mb-10 text-gray-700 max-w-xl">
+                Bringing index-style access to the private markets.
+              </p>
+
+              <p className="text-base md:text-lg text-gray-600 mb-10 max-w-xl">
+                Curated, data-backed, and growth-focused.
+              </p>
+              
+              <Button className="bg-teal-800 hover:bg-teal-700 text-white font-bold px-8 py-6 text-lg rounded-md shadow-lg">
+                Request a demo
+              </Button>
+            </div>
+
+            {/* Right side - Floating dashboard visualization */}
+            <div className="md:w-1/2 flex justify-center items-center relative">
+              <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden" style={{ maxWidth: '500px' }}>
+                {/* Main chart screen */}
+                <div className="relative bg-white p-4 rounded-lg shadow-lg transform transition hover:scale-105 duration-500 z-20">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-bold text-lg text-gray-800">Fund 50 Performance</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                      <span className="text-sm text-green-600 font-semibold">+24.8%</span>
+                    </div>
+                  </div>
+                  
+                  {/* Performance chart */}
+                  <div className="h-40 w-full relative">
+                    <svg viewBox="0 0 400 120" className="w-full h-full">
+                      <path
+                        d="M0,100 C20,80 40,110 60,90 C80,70 100,100 120,80 C140,60 160,90 180,70 C200,50 220,80 240,60 C260,40 280,70 300,50 C320,30 340,60 360,40 C380,20 400,50 400,30"
+                        fill="none"
+                        stroke="#6949A7"
+                        strokeWidth="3"
+                      />
+                      <path
+                        d="M0,100 C20,80 40,110 60,90 C80,70 100,100 120,80 C140,60 160,90 180,70 C200,50 220,80 240,60 C260,40 280,70 300,50 C320,30 340,60 360,40 C380,20 400,50 400,30"
+                        fill="url(#gradient)"
+                        strokeWidth="0"
+                        opacity="0.3"
+                      />
+                      <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#6949A7" />
+                          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  
+                  {/* Data points */}
+                  <div className="flex justify-between mt-2 text-sm text-gray-600">
+                    <div>
+                      <div className="font-bold">Initial</div>
+                      <div>$10,000</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-right">Current</div>
+                      <div className="text-green-600">$12,480</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Smaller floating card */}
+                <div className="absolute -bottom-4 -right-8 bg-white p-3 rounded-lg shadow-lg transform rotate-6 z-10 w-48">
+                  <div className="font-bold text-sm mb-1">Top performers</div>
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-xs">
+                      <span>ByteDance</span>
+                      <span className="text-green-600">+36.2%</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span>SpaceX</span>
+                      <span className="text-green-600">+28.9%</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Market ticker */}
+                <div className="absolute -top-4 -left-6 bg-white p-2 rounded-lg shadow-lg transform -rotate-3 z-10">
+                  <div className="flex items-center gap-2 text-xs">
+                    <div className="flex items-center">
+                      <span className="font-semibold">STRGZ</span>
+                      <span className="text-green-600 ml-1">↑ 4.2%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Stock ticker at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gray-100/80 backdrop-blur-sm py-2 overflow-hidden z-10">
+            <div className="flex gap-4 animate-[slide_30s_linear_infinite]">
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">SpaceX</span>
+                <span className="text-green-600">$388.94B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">Swiggy</span>
+                <span className="text-green-600">$27.81B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">Neuralink</span>
+                <span className="text-green-600">$10.87B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">ByteDance</span>
+                <span className="text-green-600">$266.17B ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">FirstCry</span>
+                <span className="text-red-600">$4.34B ↓</span>
+              </div>
+            </div>
           </div>
         </section>
 
