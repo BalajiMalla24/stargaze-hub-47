@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -88,40 +87,41 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Stock ticker at bottom */}
+          {/* Stock ticker at bottom - Updated with Indian companies and INR values */}
           <div className="absolute bottom-0 left-0 right-0 bg-white/70 backdrop-blur-sm py-3 overflow-hidden z-10">
             <div className="flex gap-8 stock-ticker">
               <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">SpaceX</span>
-                <span className="text-green-600">$388.94B ↑</span>
+                <span className="font-medium">Tata Capital</span>
+                <span className="text-green-600">₹32,500 Cr ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">ByteDance</span>
-                <span className="text-green-600">$266.17B ↑</span>
+                <span className="font-medium">Zepto</span>
+                <span className="text-green-600">₹45,800 Cr ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">Stripe</span>
-                <span className="text-green-600">$65.48B ↑</span>
+                <span className="font-medium">NSE</span>
+                <span className="text-green-600">₹2,75,000 Cr ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">Klarna</span>
-                <span className="text-green-600">$12.75B ↑</span>
+                <span className="font-medium">Lenskart</span>
+                <span className="text-green-600">₹18,500 Cr ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">FirstCry</span>
-                <span className="text-red-600">$4.34B ↓</span>
+                <span className="font-medium">OYO</span>
+                <span className="text-red-600">₹8,400 Cr ↓</span>
+              </div>
+              {/* Duplicate for continuous animation */}
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">Tata Capital</span>
+                <span className="text-green-600">₹32,500 Cr ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">SpaceX</span>
-                <span className="text-green-600">$388.94B ↑</span>
+                <span className="font-medium">Zepto</span>
+                <span className="text-green-600">₹45,800 Cr ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">ByteDance</span>
-                <span className="text-green-600">$266.17B ↑</span>
-              </div>
-              <div className="flex items-center whitespace-nowrap gap-1">
-                <span className="font-medium">Stripe</span>
-                <span className="text-green-600">$65.48B ↑</span>
+                <span className="font-medium">NSE</span>
+                <span className="text-green-600">₹2,75,000 Cr ↑</span>
               </div>
             </div>
           </div>
