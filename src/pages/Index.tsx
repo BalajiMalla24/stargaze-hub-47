@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -87,7 +88,7 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Stock ticker at bottom - Updated with Indian companies and INR values */}
+          {/* Stock ticker at bottom - Updated with more Indian companies and INR values */}
           <div className="absolute bottom-0 left-0 right-0 bg-white/70 backdrop-blur-sm py-3 overflow-hidden z-10">
             <div className="flex gap-8 stock-ticker">
               <div className="flex items-center whitespace-nowrap gap-1">
@@ -101,6 +102,18 @@ const Index = () => {
               <div className="flex items-center whitespace-nowrap gap-1">
                 <span className="font-medium">NSE</span>
                 <span className="text-green-600">₹2,75,000 Cr ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">OfBusiness</span>
+                <span className="text-green-600">₹18,700 Cr ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">SBI MF</span>
+                <span className="text-green-600">₹7,85,000 Cr ↑</span>
+              </div>
+              <div className="flex items-center whitespace-nowrap gap-1">
+                <span className="font-medium">Razorpay</span>
+                <span className="text-green-600">₹49,200 Cr ↑</span>
               </div>
               <div className="flex items-center whitespace-nowrap gap-1">
                 <span className="font-medium">Lenskart</span>
