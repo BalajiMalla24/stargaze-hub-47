@@ -8,32 +8,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
-  const logosRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const logos = logosRef.current;
-    if (!logos) return;
-
-    // Simple animation for logos
-    const animateLogos = () => {
-      const children = Array.from(logos.children);
-      children.forEach((child, index) => {
-        (child as HTMLElement).style.animationDelay = `${index * 0.2}s`;
-        (child as HTMLElement).classList.add('animate-fade-in');
-      });
-    };
-
-    animateLogos();
-  }, []);
-
-  const companyLogos = [
-    { name: 'Tata Elxsi', src: '/lovable-uploads/c00bd6e5-b212-4b7f-b44e-1a2ba50833d6.png' },
-    { name: 'Delhivery', src: '/lovable-uploads/41b83d4b-1a8b-418a-af8e-0c39ac7de3cf.png' },
-    { name: 'Swiggy', src: '/lovable-uploads/b1ead9bd-470e-47a6-ba99-561963a08f00.png' },
-    { name: 'Zepto', src: '/lovable-uploads/7f0cb945-f4f8-492b-aa1a-9cc8b2aed2d1.png' },
-    { name: 'FirstCry', src: '/lovable-uploads/65c9b09f-40fa-40fc-8300-30b3ab2fc42f.png' },
-  ];
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -70,15 +44,15 @@ const Index = () => {
 
           {/* Content container */}
           <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center h-full py-16">
-            {/* Left side text content */}
-            <div className="md:w-1/2 space-y-6 text-left mb-12 md:mb-0 mt-16 md:mt-0">
+            {/* Hero content */}
+            <div className="w-full text-left mb-12 md:mb-0 mt-16 md:mt-0">
               <div className="inline-block bg-black/5 backdrop-blur-sm px-6 py-2 rounded-full mb-2">
                 <span className="text-stargaze-gold font-medium">Insights</span>
                 <span className="mx-4">|</span>
                 <span>Why private equity belongs in a 2025 portfolio</span>
               </div>
               
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-teal-900 leading-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-stargaze-purple leading-tight">
                 Private Markets,<br/>Reimagined.
               </h1>
               
@@ -90,86 +64,9 @@ const Index = () => {
                 Curated, data-backed, and growth-focused.
               </p>
               
-              <Button className="bg-teal-800 hover:bg-teal-700 text-white font-bold px-8 py-6 text-lg rounded-md shadow-lg">
+              <Button className="bg-stargaze-purple hover:bg-stargaze-purple/90 text-white font-bold px-8 py-6 text-lg rounded-md shadow-lg">
                 Request a demo
               </Button>
-            </div>
-
-            {/* Right side - Floating dashboard visualization */}
-            <div className="md:w-1/2 flex justify-center items-center relative">
-              <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden" style={{ maxWidth: '500px' }}>
-                {/* Main chart screen */}
-                <div className="relative bg-white p-4 rounded-lg shadow-lg transform transition hover:scale-105 duration-500 z-20">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-bold text-lg text-gray-800">Fund 50 Performance</h3>
-                    <div className="flex items-center gap-2">
-                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
-                      <span className="text-sm text-green-600 font-semibold">+24.8%</span>
-                    </div>
-                  </div>
-                  
-                  {/* Performance chart */}
-                  <div className="h-40 w-full relative">
-                    <svg viewBox="0 0 400 120" className="w-full h-full">
-                      <path
-                        d="M0,100 C20,80 40,110 60,90 C80,70 100,100 120,80 C140,60 160,90 180,70 C200,50 220,80 240,60 C260,40 280,70 300,50 C320,30 340,60 360,40 C380,20 400,50 400,30"
-                        fill="none"
-                        stroke="#6949A7"
-                        strokeWidth="3"
-                      />
-                      <path
-                        d="M0,100 C20,80 40,110 60,90 C80,70 100,100 120,80 C140,60 160,90 180,70 C200,50 220,80 240,60 C260,40 280,70 300,50 C320,30 340,60 360,40 C380,20 400,50 400,30"
-                        fill="url(#gradient)"
-                        strokeWidth="0"
-                        opacity="0.3"
-                      />
-                      <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#6949A7" />
-                          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                  
-                  {/* Data points */}
-                  <div className="flex justify-between mt-2 text-sm text-gray-600">
-                    <div>
-                      <div className="font-bold">Initial</div>
-                      <div>$10,000</div>
-                    </div>
-                    <div>
-                      <div className="font-bold text-right">Current</div>
-                      <div className="text-green-600">$12,480</div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Smaller floating card */}
-                <div className="absolute -bottom-4 -right-8 bg-white p-3 rounded-lg shadow-lg transform rotate-6 z-10 w-48">
-                  <div className="font-bold text-sm mb-1">Top performers</div>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-xs">
-                      <span>ByteDance</span>
-                      <span className="text-green-600">+36.2%</span>
-                    </div>
-                    <div className="flex justify-between text-xs">
-                      <span>SpaceX</span>
-                      <span className="text-green-600">+28.9%</span>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Market ticker */}
-                <div className="absolute -top-4 -left-6 bg-white p-2 rounded-lg shadow-lg transform -rotate-3 z-10">
-                  <div className="flex items-center gap-2 text-xs">
-                    <div className="flex items-center">
-                      <span className="font-semibold">STRGZ</span>
-                      <span className="text-green-600 ml-1">↑ 4.2%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           
@@ -196,23 +93,6 @@ const Index = () => {
                 <span className="font-medium">FirstCry</span>
                 <span className="text-red-600">$4.34B ↓</span>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Partners Section - with animated logos */}
-        <section className="py-12 bg-white border-b">
-          <div className="container mx-auto px-4">
-            <div ref={logosRef} className="grid grid-cols-2 md:grid-cols-5 gap-12 items-center justify-items-center">
-              {companyLogos.map((company, index) => (
-                <div key={index} className="transition-all duration-500 hover:scale-110 w-32 h-16 flex items-center justify-center">
-                  <img 
-                    src={company.src} 
-                    alt={company.name} 
-                    className="h-12 md:h-16 w-auto object-contain"
-                  />
-                </div>
-              ))}
             </div>
           </div>
         </section>
